@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "last_updated": "2025-02-20T21:46:10Z",
+    "ai_assistant": "Windsurf AI",
+    "purpose": "Track AI-assisted backend development progress, errors, and learning"
+  },
+  
+  "current_focus": {
+    "task": "Initial Django project setup",
+    "started_at": "2025-02-20T21:46:10Z",
+    "status": "in_progress",
+    "blockers": []
+  },
+  
+  "ai_learning": {
+    "common_errors": [],
+    "solutions_applied": [],
+    "best_practices": [
+      "Always use environment variables for sensitive data",
+      "Follow Django's class-based views for consistency"
+    ]
+  },
+  
+  "development": {
+    "database": {
+      "type": "Supabase",
+      "status": "pending_setup",
+      "migrations": [],
+      "schema_changes": []
+    },
+    
+    "api": {
+      "auth": {
+        "status": "planned",
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/api/auth/register/",
+            "status": "planned",
+            "ai_notes": "Implement input validation and password hashing"
+          },
+          {
+            "method": "POST",
+            "path": "/api/auth/login/",
+            "status": "planned",
+            "ai_notes": "Implement JWT token generation"
+          },
+          {
+            "method": "POST",
+            "path": "/api/auth/logout/",
+            "status": "planned",
+            "ai_notes": "Implement token invalidation"
+          }
+        ]
+      },
+      "profiles": {
+        "status": "planned",
+        "endpoints": []
+      }
+    },
+    
+    "dependencies": {
+      "django": "^4.2.0",
+      "djangorestframework": "^3.14.0",
+      "django-cors-headers": "^4.3.0",
+      "python-dotenv": "^1.0.0",
+      "supabase": "^2.0.0"
+    },
+    
+    "environment": {
+      "python_version": "3.9+",
+      "node_version": "18.0.0+",
+      "os": "windows"
+    }
+  },
+  
+  "ai_interaction_log": [
+    {
+      "timestamp": "2025-02-20T21:46:10Z",
+      "action": "context_update",
+      "details": "Enhanced backend context structure for better AI assistance",
+      "ai_notes": "Added detailed tracking for AI learning and error patterns"
+    }
+  ],
+  
+  "error_tracking": {
+    "recent_errors": [],
+    "error_patterns": {},
+    "resolutions_applied": {}
+  },
+  
+  "next_steps": [
+    "Set up Django project structure",
+    "Configure Supabase connection",
+    "Implement authentication endpoints"
+  ]
+}
