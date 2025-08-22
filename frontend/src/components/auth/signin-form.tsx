@@ -2,27 +2,26 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-export function SignupForm() {
-  const [fullName, setFullName] = useState("")
+export function SigninForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [role, setRole] = useState("")
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     
-    // TODO: Implement Supabase registration
-    console.log("Signup attempt:", { fullName, email, password, role })
+    // TODO: Implement Supabase authentication
+    console.log("Signin attempt:", { email, password })
     
     setLoading(false)
   }
 
-  const handleGoogleSignup = () => {
+  const handleGoogleSignin = () => {
     // TODO: Implement Google OAuth
-    console.log("Google signup clicked")
+    console.log("Google signin clicked")
   }
 
   return (
@@ -43,13 +42,13 @@ export function SignupForm() {
 
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Create your account</h1>
-            <p className="text-gray-600 text-sm">Join MedLink360 in 2 minutes</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
+            <p className="text-gray-600 text-sm">Sign in to your MedLink360 account</p>
           </div>
 
-          {/* Google Signup Button */}
+          {/* Google Signin Button */}
           <button
-            onClick={handleGoogleSignup}
+            onClick={handleGoogleSignin}
             className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-700 hover:bg-gray-50 transition-colors mb-6"
           >
             <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -63,22 +62,6 @@ export function SignupForm() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Full Name */}
-            <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
-                Full name
-              </label>
-              <input
-                id="fullName"
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Dr. Divina237"
-              />
-            </div>
-            
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -111,42 +94,22 @@ export function SignupForm() {
               />
             </div>
             
-            {/* Role */}
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
-                Role
-              </label>
-              <select
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-500"
-              >
-                <option value="">Select your role</option>
-                <option value="doctor">Doctor</option>
-                <option value="nurse">Nurse</option>
-                <option value="admin">Administrator</option>
-                <option value="patient">Patient</option>
-              </select>
-            </div>
-            
-            {/* Create Account Button */}
+            {/* Sign In Button */}
             <Button 
               type="submit" 
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 mt-6"
               disabled={loading}
             >
-              {loading ? "Creating account..." : "Create account"}
+              {loading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
           
-          {/* Sign In Link */}
+          {/* Create Account Link */}
           <div className="mt-4 text-center">
-            <span className="text-sm text-gray-600">Already have an account </span>
-            <a href="/signin" className="text-sm text-blue-600 hover:underline">
-              Sign in
-            </a>
+            <span className="text-sm text-gray-600">Don't have an account </span>
+            <Link href="/signup" className="text-sm text-blue-600 hover:underline">
+              Create one
+            </Link>
           </div>
         </div>
       </div>
@@ -156,12 +119,12 @@ export function SignupForm() {
         <div className="text-white text-center">
           <div className="w-32 h-32 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
             <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
           </div>
-          <h3 className="text-xl font-semibold mb-2">Healthcare Professionals</h3>
+          <h3 className="text-xl font-semibold mb-2">Welcome Back</h3>
           <p className="text-blue-100 max-w-sm">
-            Join thousands of healthcare professionals managing patient care efficiently
+            Continue managing your healthcare practice with MedLink360
           </p>
         </div>
       </div>
