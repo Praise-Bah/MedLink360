@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/common/Button"
 
 export function LandingHeader() {
   return (
@@ -30,11 +30,17 @@ export function LandingHeader() {
             <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               Contact
             </a>
+            <Link href="/login" className="text-gray-600 hover:text-blue-600 transition-colors">
+              Sign In
+            </Link>
+            <Link href="/signup">
+              <Button>Get Started</Button>
+            </Link>
           </nav>
 
           {/* Auth Buttons */}
           <div className="flex items-center space-x-4">
-            <Link href="/signin">
+            <Link href="/login">
               <Button variant="ghost" size="sm">
                 Login
               </Button>

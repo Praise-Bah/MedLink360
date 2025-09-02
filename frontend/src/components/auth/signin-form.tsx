@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/common/Button"
 import Link from "next/link"
 
 export function SigninForm() {
@@ -106,7 +106,7 @@ export function SigninForm() {
           
           {/* Create Account Link */}
           <div className="mt-4 text-center">
-            <span className="text-sm text-gray-600">Don't have an account </span>
+            <span className="text-sm text-gray-600">Don't have an account? </span>
             <Link href="/signup" className="text-sm text-blue-600 hover:underline">
               Create one
             </Link>

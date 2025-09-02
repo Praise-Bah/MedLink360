@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/common/Button"
 
 export function SignupForm() {
   const [fullName, setFullName] = useState("")
@@ -144,7 +144,7 @@ export function SignupForm() {
           {/* Sign In Link */}
           <div className="mt-4 text-center">
             <span className="text-sm text-gray-600">Already have an account </span>
-            <a href="/signin" className="text-sm text-blue-600 hover:underline">
+            <a href="/login" className="text-sm text-blue-600 hover:underline">
               Sign in
             </a>
           </div>
