@@ -7,7 +7,7 @@ export function LandingHeader() {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
             <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3">
@@ -16,8 +16,8 @@ export function LandingHeader() {
             <span className="text-xl font-bold text-gray-800">MedLink360</span>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          {/* Centered Navigation */}
+          <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">
             <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               Services
             </a>
@@ -30,25 +30,15 @@ export function LandingHeader() {
             <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               Contact
             </a>
-            <Link href="/login" className="text-gray-600 hover:text-blue-600 transition-colors">
+          </nav>
+
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link href="/login" className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               Sign In
             </Link>
             <Link href="/signup">
               <Button>Get Started</Button>
-            </Link>
-          </nav>
-
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-4">
-            <Link href="/login">
-              <Button variant="ghost" size="sm">
-                Login
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                Signup
-              </Button>
             </Link>
           </div>
         </div>

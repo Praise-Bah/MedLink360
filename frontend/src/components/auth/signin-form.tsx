@@ -27,7 +27,7 @@ export function SigninForm() {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Form */}
-      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 bg-white max-w-md">
+      <div className="w-2/5 flex flex-col justify-center px-8 sm:px-12 lg:px-16 bg-white">
         <div className="w-full">
           {/* Logo */}
           <div className="mb-8">
@@ -115,7 +115,7 @@ export function SigninForm() {
       </div>
 
       {/* Right side - Blue placeholder area */}
-      <div className="flex-1 bg-blue-600 flex items-center justify-center">
+      <div className="w-3/5 bg-blue-600 flex items-center justify-center">
         <div className="text-white text-center">
           <div className="w-32 h-32 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
             <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
