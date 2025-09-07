@@ -1,5 +1,5 @@
-import { DashboardContent } from "@/components/dashboard/dashboard-content"
+import { PatientDashboard } from "@/components/dashboard/patient-dashboard"
 
 export default function DashboardPage() {
-  return <DashboardContent />
+  return <PatientDashboard />
 }
