@@ -15,13 +15,17 @@ export function HowItWorksSection() {
   ]
 
   return (
-    <section id="how-it-works" className="py-16 bg-white">
+    <section 
+      id="how-it-works" 
+      className="min-h-screen flex items-center bg-cover bg-center bg-no-repeat py-16"
+      style={{ backgroundImage: 'url(/pattern2.png)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-600 mb-4">
+          <h2 className="text-5xl lg:text-6xl font-bold text-blue-600 mb-4">
             How MedLink360 Works
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-xl text-gray-600">
             Three simple steps to secure, verified healthcare access
           </p>
         </div>
@@ -34,11 +38,11 @@ export function HowItWorksSection() {
                 <span className="text-white text-2xl font-bold">{index + 1}</span>
               </div>
               
-              <h3 className="text-xl font-bold text-blue-600 mb-3">
+              <h3 className="text-2xl font-bold text-blue-600 mb-4">
                 {step.title}
               </h3>
               
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-800 leading-relaxed font-medium">
                 {step.description}
               </p>
             </div>

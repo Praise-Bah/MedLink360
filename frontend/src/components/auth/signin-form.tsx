@@ -120,7 +120,7 @@ export function SigninForm() {
           src="/Rectangle15.png" 
           alt="Healthcare professionals" 
           className="w-full h-full object-contain"
-          style={{ objectPosition: 'center center', border: 'solid', backgroundColor: '#0080FF' }}
+          style={{ objectPosition: 'center center'}}
         />
       </div>
     </div>
