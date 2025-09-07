@@ -4,7 +4,10 @@ import { Button } from "@/components/common/Button"
 
 export function HeroSection() {
   return (
-    <section className="bg-gray-50 py-20">
+    <section 
+      className="min-h-screen flex items-center relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: 'url(/pattern1.png)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Content */}
@@ -37,16 +40,13 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right side - Blue placeholder for image */}
-          <div className="bg-blue-600 rounded-lg h-96 flex items-center justify-center">
-            <div className="text-white text-center">
-              <div className="w-24 h-24 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold">Healthcare Professional</h3>
-            </div>
+          {/* Right side - Healthcare professional image */}
+          <div className="relative">
+            <img 
+              src="/image1.png" 
+              alt="Healthcare professional with stethoscope" 
+              className="w-full h-[100vh] max-w-2xl ml-auto"
+            />
           </div>
         </div>
       </div>
