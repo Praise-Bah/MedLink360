@@ -25,19 +25,19 @@ export function PatientDashboard() {
             <span className="text-lg">📅</span>
             <span>Appointments</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
+          <a href="/medical-book" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
             <span className="text-lg">📋</span>
             <span>Medical Book</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
+          <a href="/notifications" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
             <span className="text-lg">🔔</span>
             <span>Notifications</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
+          <a href="/profile" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
             <span className="text-lg">👤</span>
             <span>Profile</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
+          <a href="/settings" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
             <span className="text-lg">⚙️</span>
             <span>Settings</span>
           </a>
