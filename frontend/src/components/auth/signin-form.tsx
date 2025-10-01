@@ -95,19 +95,21 @@ export function SigninForm() {
             </div>
             
             {/* Sign In Button */}
-            <Button 
-              type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 mt-4 text-sm"
-              disabled={loading}
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </Button>
+           <Button
+  type="button"
+  onClick={() => (window.location.href = "/dashboard")}
+  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 mt-4 text-sm"
+  disabled={loading}
+>
+  {loading ? "Signing in..." : "Sign in"}
+</Button>
+
           </form>
           
           {/* Create Account Link */}
           <div className="mt-3 text-center">
             <span className="text-xs text-gray-600">Don't have an account? </span>
-            <Link href="/signup" className="text-xs text-blue-600 hover:underline">
+            <Link href="auth/signup" className="text-xs text-blue-600 hover:underline">
               Create one
             </Link>
           </div>

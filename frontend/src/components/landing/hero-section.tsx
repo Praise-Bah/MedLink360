@@ -31,10 +31,10 @@ export function HeroSection() {
             </p>
             
             <div className="flex space-x-4">
-              <Button className="bg-blue-600 hover:bg-blue-700 px-6 py-3">
+              <Button className="bg-blue-600 hover:bg-white-700 px-6 py-3">
                 Find a doctor
               </Button>
-              <Button variant="outline" className="px-6 py-3">
+              <Button className="px-6 py-3 hover:bg-blue-700 bg-white-600 ">
                 Learn more
               </Button>
             </div>

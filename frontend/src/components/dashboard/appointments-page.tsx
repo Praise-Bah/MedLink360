@@ -86,27 +86,27 @@ export function AppointmentsPage() {
         {/* Navigation */}
         <nav className="space-y-2">
           <a href="/dashboard" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📊</span>
+            <span className="text-lg"></span>
             <span>Dashboard Overview</span>
           </a>
           <a href="#" className="flex items-center space-x-3 text-white bg-white/20 rounded-lg px-4 py-3">
-            <span className="text-lg">📅</span>
+            <span className="text-lg"></span>
             <span>Appointments</span>
           </a>
           <a href="/medical-book" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📋</span>
+            <span className="text-lg"></span>
             <span>Medical Book</span>
           </a>
           <a href="/notifications" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">🔔</span>
+            <span className="text-lg"></span>
             <span>Notifications</span>
           </a>
           <a href="/profile" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">👤</span>
+            <span className="text-lg"></span>
             <span>Profile</span>
           </a>
           <a href="/settings" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">⚙️</span>
+            <span className="text-lg"></span>
             <span>Settings</span>
           </a>
         </nav>
@@ -123,7 +123,7 @@ export function AppointmentsPage() {
             </div>
           </div>
           <button className="flex items-center space-x-2 text-white/80 hover:text-white mt-4 px-4 py-2">
-            <span className="text-lg">🚪</span>
+            <span className="text-lg"></span>
             <span>Logout</span>
           </button>
         </div>
@@ -159,9 +159,8 @@ export function AppointmentsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
-            <Button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md">
-              Book New Appointment
-            </Button>
+           <Button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md"> Book New Appointment </Button>
+
           </div>
         </div>
 
@@ -189,11 +188,11 @@ export function AppointmentsPage() {
                     <div className="grid grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <div className="flex items-center space-x-2">
-                          <span className="text-gray-500">📅</span>
+                      <span className="text-gray-500"></span>
                           <span className="text-gray-700">{appointment.date} at {appointment.time}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-gray-500">📍</span>
+                          <span className="text-gray-500"></span>
                           <div>
                             <div className="text-gray-700">{appointment.location}</div>
                             <div className="text-gray-500 text-sm">{appointment.address}</div>
@@ -228,15 +227,15 @@ export function AppointmentsPage() {
               {/* Action Buttons */}
               <div className="flex items-center space-x-4 mt-6 pt-4 border-t border-gray-100">
                 <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
-                  <span>👁️</span>
+                  <span></span>
                   <span>View Details</span>
                 </button>
                 <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
-                  <span>📅</span>
+                  <span></span>
                   <span>Reschedule</span>
                 </button>
                 <button className="flex items-center space-x-2 text-red-600 hover:text-red-700">
-                  <span>❌</span>
+                  <span></span>
                   <span>Cancel</span>
                 </button>
               </div>

@@ -65,7 +65,7 @@ export function LoginForm() {
       </form>
       
       <div className="mt-4 text-center">
-        <a href="#" className="text-sm text-blue-600 hover:underline">
+        <a href="/auth/forgot-password" className="text-sm text-blue-600 hover:underline">
           Forgot your password?
         </a>
       </div>

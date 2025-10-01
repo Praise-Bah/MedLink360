@@ -18,27 +18,27 @@ export function PatientDashboard() {
         {/* Navigation */}
         <nav className="space-y-2">
           <a href="#" className="flex items-center space-x-3 text-white bg-white/20 rounded-lg px-4 py-3">
-            <span className="text-lg">📊</span>
+            <span className="text-lg"></span>
             <span>Dashboard Overview</span>
           </a>
           <a href="/appointments" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📅</span>
+            <span className="text-lg"></span>
             <span>Appointments</span>
           </a>
           <a href="/medical-book" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📋</span>
+            <span className="text-lg"></span>
             <span>Medical Book</span>
           </a>
           <a href="/notifications" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">🔔</span>
+            <span className="text-lg"></span>
             <span>Notifications</span>
           </a>
           <a href="/profile" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">👤</span>
+            <span className="text-lg"></span>
             <span>Profile</span>
           </a>
           <a href="/settings" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">⚙️</span>
+            <span className="text-lg"></span>
             <span>Settings</span>
           </a>
         </nav>
@@ -55,7 +55,7 @@ export function PatientDashboard() {
             </div>
           </div>
           <button className="flex items-center space-x-2 text-white/80 hover:text-white mt-4 px-4 py-2">
-            <span className="text-lg">🚪</span>
+            <span className="text-lg"></span>
             <span>Logout</span>
           </button>
         </div>
@@ -73,7 +73,7 @@ export function PatientDashboard() {
         <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 mb-6">
           <div className="flex items-center mb-4">
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
-              <span className="text-white text-lg">⚠️</span>
+              <span className="text-white text-lg"></span>
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Emergency Information - Ministry of Health</h2>
@@ -87,12 +87,12 @@ export function PatientDashboard() {
           </div>
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div className="text-white/80">
-              <p>📞 911 - Immediate Emergency</p>
-              <p>📞 911 - Immediate Emergency</p>
+              <p> 911 - Immediate Emergency</p>
+              <p> 911 - Immediate Emergency</p>
             </div>
             <div className="text-white/80">
-              <p>📞 +237 677777777</p>
-              <p>🌐 health.gov/emergency</p>
+              <p> +237 677777777</p>
+              <p> health.gov/emergency</p>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@ export function PatientDashboard() {
           {/* Upcoming Appointments */}
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6">
             <div className="flex items-center mb-4">
-              <span className="text-white text-lg mr-3">📅</span>
+              <span className="text-white text-lg mr-3"></span>
               <h2 className="text-xl font-bold text-white">Upcoming Appointments</h2>
             </div>
             
@@ -127,7 +127,7 @@ export function PatientDashboard() {
           {/* Health Summary */}
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6">
             <div className="flex items-center mb-4">
-              <span className="text-white text-lg mr-3">❤️</span>
+              <span className="text-white text-lg mr-3"></span>
               <h2 className="text-xl font-bold text-white">Health Summary</h2>
             </div>
             
@@ -152,7 +152,7 @@ export function PatientDashboard() {
         <div className="mt-6 bg-white/20 backdrop-blur-sm rounded-xl p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
-              <span className="text-white text-lg mr-3">🔔</span>
+              <span className="text-white text-lg mr-3"></span>
               <h2 className="text-xl font-bold text-white">Recent Notifications</h2>
             </div>
             <button className="text-white/80 hover:text-white text-sm">View All</button>

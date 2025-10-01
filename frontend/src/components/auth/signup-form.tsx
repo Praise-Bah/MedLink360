@@ -132,19 +132,21 @@ export function SignupForm() {
             </div>
             
             {/* Create Account Button */}
-            <Button 
-              type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 mt-4 text-sm"
-              disabled={loading}
-            >
-              {loading ? "Creating account..." : "Create account"}
-            </Button>
+            <Button
+  type="button"
+  onClick={() => window.location.href = "/login"}
+  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 mt-4 text-sm"
+  disabled={loading}
+>
+  {loading ? "Creating account..." : "Create account"}
+</Button>
+
           </form>
           
           {/* Sign In Link */}
           <div className="mt-3 text-center">
             <span className="text-xs text-gray-600">Already have an account </span>
-            <a href="/login" className="text-xs text-blue-600 hover:underline">
+            <a href="auth/login" className="text-xs text-blue-600 hover:underline">
               Sign in
             </a>
           </div>

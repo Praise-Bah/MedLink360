@@ -42,27 +42,27 @@ export function SettingsPage() {
         {/* Navigation */}
         <nav className="space-y-2">
           <a href="/dashboard" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📊</span>
+            <span className="text-lg"></span>
             <span>Dashboard Overview</span>
           </a>
           <a href="/appointments" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📅</span>
+            <span className="text-lg"></span>
             <span>Appointments</span>
           </a>
           <a href="/medical-book" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📋</span>
+            <span className="text-lg"></span>
             <span>Medical Book</span>
           </a>
           <a href="/notifications" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">🔔</span>
+            <span className="text-lg"></span>
             <span>Notifications</span>
           </a>
           <a href="/profile" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">👤</span>
+            <span className="text-lg"></span>
             <span>Profile</span>
           </a>
           <a href="#" className="flex items-center space-x-3 text-white bg-white/20 rounded-lg px-4 py-3">
-            <span className="text-lg">⚙️</span>
+            <span className="text-lg"></span>
             <span>Settings</span>
           </a>
         </nav>
@@ -74,7 +74,7 @@ export function SettingsPage() {
               <span className="text-sm font-medium">D</span>
             </div>
             <div>
-              <p className="font-medium text-sm">Divino237</p>
+              <p className="font-medium text-sm">Divina237</p>
               <p className="text-xs text-white/70">Patient</p>
             </div>
           </div>

@@ -5,11 +5,11 @@ import { useState } from "react"
 export function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    firstName: "Divino",
-    lastName: "",
-    email: "divino90@gmail.com",
+    firstName: "Divina",
+    lastName: "k.",
+    email: "divino963@gmail.com",
     phone: "+237 777777777",
-    dateOfBirth: "12/10/1998",
+    dateOfBirth: "12/10/1010",
     sex: "female",
     maritalStatus: "single",
     address: ""
@@ -37,27 +37,27 @@ export function ProfilePage() {
         {/* Navigation */}
         <nav className="space-y-2">
           <a href="/dashboard" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📊</span>
+            <span className="text-lg"></span>
             <span>Dashboard Overview</span>
           </a>
           <a href="/appointments" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📅</span>
+            <span className="text-lg"></span>
             <span>Appointments</span>
           </a>
           <a href="/medical-book" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">📋</span>
+            <span className="text-lg"></span>
             <span>Medical Book</span>
           </a>
           <a href="/notifications" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">🔔</span>
+            <span className="text-lg"></span>
             <span>Notifications</span>
           </a>
           <a href="#" className="flex items-center space-x-3 text-white bg-white/20 rounded-lg px-4 py-3">
-            <span className="text-lg">👤</span>
+            <span className="text-lg"></span>
             <span>Profile</span>
           </a>
           <a href="/settings" className="flex items-center space-x-3 text-white/80 hover:bg-white/10 rounded-lg px-4 py-3">
-            <span className="text-lg">⚙️</span>
+            <span className="text-lg"></span>
             <span>Settings</span>
           </a>
         </nav>
