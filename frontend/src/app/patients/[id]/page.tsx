@@ -1,4 +1,5 @@
-import { PatientDetails } from "@/components/patients/patient-details"
+import { AppShell } from "@/components/layout/app-shell"
+import { PatientDetail } from "@/components/patients/patient-detail"
 
 interface PatientDetailPageProps {
   params: {
@@ -7,5 +8,9 @@ interface PatientDetailPageProps {
 }
 
 export default function PatientDetailPage({ params }: PatientDetailPageProps) {
-  return <PatientDetails patientId={params.id} />
+  return (
+    <AppShell>
+      <PatientDetail patientId={params.id} />
+    </AppShell>
+  )
 }

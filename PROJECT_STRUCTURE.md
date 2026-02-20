@@ -37,6 +37,30 @@ MedLink360/
 │   │   │   │   ├── login/page.tsx     # Login page
 │   │   │   │   ├── signup/page.tsx    # Signup page
 │   │   │   │   └── forgot-password/page.tsx
+│   │   │   ├── entry/                  # Entry (Desktop-32)
+│   │   │   │   └── page.tsx            # Sign in/sign up choice
+│   │   │   ├── role-selection/         # Role selection
+│   │   │   │   └── page.tsx            # Role selection page
+│   │   │   ├── profile-step-one/       # Profile completion step 1
+│   │   │   │   └── page.tsx            # Personal data + agreement + ITIN
+│   │   │   ├── profile-step-two/       # Profile completion step 2
+│   │   │   │   └── page.tsx            # Contacts + home address
+│   │   │   ├── profile-role-provider/  # Role-based profile fields (provider)
+│   │   │   │   └── page.tsx            # Professional title + hospital
+│   │   │   ├── profile-role-patient/   # Role-based profile fields (patient)
+│   │   │   │   └── page.tsx            # Department + hospital history
+│   │   │   ├── verification-patient/   # Verification uploads (patient)
+│   │   │   │   └── page.tsx            # Patient previous health copy
+│   │   │   ├── verification-nurse/     # Verification uploads (nurse)
+│   │   │   │   └── page.tsx            # Nurse license + certifications
+│   │   │   ├── verification-doctor/    # Verification uploads (doctor)
+│   │   │   │   └── page.tsx            # Doctor license + degree
+│   │   │   ├── verification-lab/       # Verification uploads (lab tech)
+│   │   │   │   └── page.tsx            # Lab license + lab proof
+│   │   │   ├── verification-pharmacist/ # Verification uploads (pharmacist)
+│   │   │   │   └── page.tsx            # Pharmacy licenses + logo
+│   │   │   ├── welcome/                # Welcome (Desktop-33)
+│   │   │   │   └── page.tsx            # Welcome landing card
 │   │   │   ├── dashboard/page.tsx     # Main dashboard
 │   │   │   ├── patients/             # Patient management
 │   │   │   │   ├── page.tsx          # Patients list
@@ -48,11 +72,25 @@ MedLink360/
 │   │   │   │   ├── Button.tsx
 │   │   │   │   ├── Input.tsx
 │   │   │   │   └── Modal.tsx
+│   │   │   ├── auth/                 # Auth components
+│   │   │   │   ├── entry-card.tsx     # Entry card (Desktop-32)
+│   │   │   │   ├── profile-step-one-form.tsx # Profile completion step 1 form
+│   │   │   │   ├── profile-step-two-form.tsx # Profile completion step 2 form
+│   │   │   │   ├── profile-role-provider-form.tsx # Provider role profile form
+│   │   │   │   ├── profile-role-patient-form.tsx # Patient role profile form
+│   │   │   │   ├── verification-upload-form.tsx # Shared verification upload layout
+│   │   │   │   ├── verification-patient-form.tsx # Patient verification uploads
+│   │   │   │   ├── verification-nurse-form.tsx # Nurse verification uploads
+│   │   │   │   ├── verification-doctor-form.tsx # Doctor verification uploads
+│   │   │   │   ├── verification-lab-form.tsx # Lab technician verification uploads
+│   │   │   │   ├── verification-pharmacist-form.tsx # Pharmacist verification uploads
+│   │   │   │   ├── role-selection.tsx # Role selection UI
+│   │   │   │   └── welcome-card.tsx   # Welcome card (Desktop-33)
 │   │   │   ├── layout/              # Layout components
 │   │   │   │   ├── Header.tsx
 │   │   │   │   ├── Sidebar.tsx
 │   │   │   │   └── Footer.tsx
-│   │   │   └── ui/                  # UI component library
+│   │   │   ├── ui/                  # UI component library
 │   │   │
 │   │   ├── context/                 # React context providers
 │   │   │   ├── AuthContext.tsx      # Authentication state
@@ -84,7 +122,8 @@ MedLink360/
 │
 ├── docs/                       # Project documentation
 │   ├── api/                   # API documentation
-│   └── setup/                 # Setup guides
+│   ├── setup/                 # Setup guides
+│   └── Frontend_Roadmap.md    # Frontend implementation roadmap
 │
 ├── .github/                    # GitHub workflows
 │   ├── workflows/

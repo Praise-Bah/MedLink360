@@ -1,5 +1,10 @@
-import { NotificationsPage } from "@/components/dashboard/notifications-page"
+import { AppShell } from "@/components/layout/app-shell"
+import { NotificationsSection } from "@/components/dashboard/notifications-section"
 
 export default function Notifications() {
-  return <NotificationsPage />
+  return (
+    <AppShell>
+      <NotificationsSection />
+    </AppShell>
+  )
 }
