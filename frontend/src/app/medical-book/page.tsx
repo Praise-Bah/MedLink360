@@ -1,5 +1,10 @@
+import { AppShell } from "@/components/layout/app-shell"
 import { MedicalBookPage } from "@/components/dashboard/medical-book-page"
 
 export default function MedicalBook() {
-  return <MedicalBookPage />
+  return (
+    <AppShell>
+      <MedicalBookPage />
+    </AppShell>
+  )
 }

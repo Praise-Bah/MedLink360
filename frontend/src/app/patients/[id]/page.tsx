@@ -1,11 +1,15 @@
-import { PatientDetails } from "@/components/patients/patient-details"
+"use client"
 
-interface PatientDetailPageProps {
-  params: {
-    id: string
-  }
-}
+import { use } from "react"
+import { AppShell } from "@/components/layout/app-shell"
+import { PatientDetail } from "@/components/patients/patient-detail"
 
-export default function PatientDetailPage({ params }: PatientDetailPageProps) {
-  return <PatientDetails patientId={params.id} />
+export default function PatientDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  
+  return (
+    <AppShell>
+      <PatientDetail patientId={id} />
+    </AppShell>
+  )
 }

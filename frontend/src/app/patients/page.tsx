@@ -1,5 +1,10 @@
-import { PatientsList } from "@/components/patients/patients-list"
+import { AppShell } from "@/components/layout/app-shell"
+import { PatientRecords } from "@/components/patients/patient-records"
 
 export default function PatientsPage() {
-  return <PatientsList />
+  return (
+    <AppShell>
+      <PatientRecords />
+    </AppShell>
+  )
 }
