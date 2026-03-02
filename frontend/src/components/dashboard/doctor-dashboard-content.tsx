@@ -368,7 +368,7 @@ export function DoctorDashboardContent() {
                       className={`h-8 text-[12px] rounded-full flex items-center justify-center relative transition-colors ${
                         isOtherMonth
                           ? "text-[#adb5bd]"
-                          : item.today
+                          : item.isToday
                           ? "bg-[#007bff] text-white"
                           : isSelected
                           ? "bg-[#212529] text-white"
@@ -376,7 +376,7 @@ export function DoctorDashboardContent() {
                       }`}
                     >
                       {item.day}
-                      {item.hasEvent && !item.today && !isSelected && !isOtherMonth && (
+                      {item.hasEvent && !item.isToday && !isSelected && !isOtherMonth && (
                         <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#007bff] rounded-full" />
                       )}
                     </button>

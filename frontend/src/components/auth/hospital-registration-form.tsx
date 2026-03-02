@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/common/Button"
 
@@ -65,6 +65,11 @@ export function HospitalRegistrationForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  
+  // File input refs
+  const operatingPermitRef = useRef<HTMLInputElement>(null)
+  const hospitalLicenseRef = useRef<HTMLInputElement>(null)
+  const accreditationRef = useRef<HTMLInputElement>(null)
 
   const updateField = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -463,51 +468,120 @@ export function HospitalRegistrationForm() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Hospital Operating Permit <span className="text-red-500">*</span>
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer">
-                    <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
-                    <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
-                    <input
-                      type="file"
-                      accept=".pdf,.png,.jpg,.jpeg"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0]
-                        if (file) updateField("operatingPermit", file.name)
-                      }}
-                    />
+                  <div 
+                    onClick={() => operatingPermitRef.current?.click()}
+                    className={`border-2 border-dashed rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer ${
+                      formData.operatingPermit ? 'border-green-400 bg-green-50' : 'border-gray-300'
+                    }`}
+                  >
+                    {formData.operatingPermit ? (
+                      <>
+                        <svg className="w-8 h-8 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-sm text-green-600 font-medium">{formData.operatingPermit}</p>
+                        <p className="text-xs text-gray-500 mt-1">Click to change file</p>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
+                        <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+                      </>
+                    )}
                   </div>
-                  {formData.operatingPermit && (
-                    <p className="text-xs text-green-600 mt-1">Uploaded: {formData.operatingPermit}</p>
-                  )}
+                  <input
+                    ref={operatingPermitRef}
+                    type="file"
+                    accept=".pdf,.png,.jpg,.jpeg"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) updateField("operatingPermit", file.name)
+                    }}
+                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Hospital License <span className="text-red-500">*</span>
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer">
-                    <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
-                    <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+                  <div 
+                    onClick={() => hospitalLicenseRef.current?.click()}
+                    className={`border-2 border-dashed rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer ${
+                      formData.hospitalLicense ? 'border-green-400 bg-green-50' : 'border-gray-300'
+                    }`}
+                  >
+                    {formData.hospitalLicense ? (
+                      <>
+                        <svg className="w-8 h-8 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-sm text-green-600 font-medium">{formData.hospitalLicense}</p>
+                        <p className="text-xs text-gray-500 mt-1">Click to change file</p>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
+                        <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+                      </>
+                    )}
                   </div>
+                  <input
+                    ref={hospitalLicenseRef}
+                    type="file"
+                    accept=".pdf,.png,.jpg,.jpeg"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) updateField("hospitalLicense", file.name)
+                    }}
+                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Health Facility Accreditation
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer">
-                    <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
-                    <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+                  <div 
+                    onClick={() => accreditationRef.current?.click()}
+                    className={`border-2 border-dashed rounded-lg p-4 text-center hover:border-blue-400 transition-colors cursor-pointer ${
+                      formData.accreditation ? 'border-green-400 bg-green-50' : 'border-gray-300'
+                    }`}
+                  >
+                    {formData.accreditation ? (
+                      <>
+                        <svg className="w-8 h-8 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-sm text-green-600 font-medium">{formData.accreditation}</p>
+                        <p className="text-xs text-gray-500 mt-1">Click to change file</p>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
+                        <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+                      </>
+                    )}
                   </div>
+                  <input
+                    ref={accreditationRef}
+                    type="file"
+                    accept=".pdf,.png,.jpg,.jpeg"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) updateField("accreditation", file.name)
+                    }}
+                  />
                 </div>
 
                 <div className="bg-blue-50 rounded-lg p-4 mt-4">

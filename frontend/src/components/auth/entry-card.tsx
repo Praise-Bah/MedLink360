@@ -34,6 +34,17 @@ export function EntryCard() {
                 Sign Up
               </Link>
             </div>
+            <div className="mt-6 pt-6 border-t border-[color:var(--border-light)]">
+              <p className="text-[14px] text-[rgba(33,37,41,0.6)] mb-3">
+                Are you a hospital administrator?
+              </p>
+              <Link
+                href="/register-hospital"
+                className="text-[14px] font-medium text-[color:var(--brand-primary)] hover:underline"
+              >
+                Register your hospital →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
