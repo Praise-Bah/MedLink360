@@ -309,7 +309,7 @@ Dashboard Elements:
 Identical to Doctor Module:
 •	Upload QR Code Image
 •	Camera Scan
-•	View-only or edit access based on QR permissions
+•	 edit access based on QR permissions
 •	Access to patient medical book
 •	Activity logging and patient notifications
 4.3 Patient Management

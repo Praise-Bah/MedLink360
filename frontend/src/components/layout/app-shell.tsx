@@ -45,11 +45,23 @@ const navigationItems: NavItem[] = [
   // Pharmacist specific - RECORD section
   { label: "Notification", href: "/notifications", icon: "", roles: ["pharmacist"] },
   { label: "Settings", href: "/settings", icon: "", roles: ["pharmacist"] },
-  // Nurse/Lab specific
-  { label: "Dashboard", href: "/dashboard", icon: "", roles: ["nurse", "lab-technician"] },
-  { label: "Patients", href: "/patients", icon: "", roles: ["nurse", "lab-technician"] },
-  { label: "Notification", href: "/notifications", icon: "", roles: ["nurse", "lab-technician"] },
-  { label: "Settings", href: "/settings", icon: "", roles: ["nurse", "lab-technician"] },
+  // Nurse specific - MAIN section
+  { label: "Dashboard", href: "/dashboard", icon: "", roles: ["nurse"] },
+  { label: "Assigned Patients", href: "/assigned-patients", icon: "", roles: ["nurse"] },
+  { label: "Upcoming Appointments", href: "/appointments", icon: "", roles: ["nurse"] },
+  { label: "Record Vitals", href: "/record-vitals", icon: "", roles: ["nurse"] },
+  { label: "Scan Patient QR", href: "/qr-access", icon: "", roles: ["nurse"] },
+  { label: "Daily Notes", href: "/daily-notes", icon: "", roles: ["nurse"] },
+  { label: "Medication Rounds", href: "/medication-rounds", icon: "", roles: ["nurse"] },
+  // Nurse specific - RECORD section
+  { label: "Notification", href: "/notifications", icon: "", roles: ["nurse"] },
+  { label: "Settings", href: "/settings", icon: "", roles: ["nurse"] },
+  { label: "Help", href: "/help", icon: "", roles: ["nurse"] },
+  // Lab technician specific
+  { label: "Dashboard", href: "/dashboard", icon: "", roles: ["lab-technician"] },
+  { label: "Patients", href: "/patients", icon: "", roles: ["lab-technician"] },
+  { label: "Notification", href: "/notifications", icon: "", roles: ["lab-technician"] },
+  { label: "Settings", href: "/settings", icon: "", roles: ["lab-technician"] },
 ]
 
 function getNavIcon(label: string, isActive: boolean) {
@@ -165,6 +177,50 @@ function getNavIcon(label: string, isActive: boolean) {
         <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
           <path d="M13 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V16C4 16.5304 4.21071 17.0391 4.58579 17.4142C4.96086 17.7893 5.46957 18 6 18H14C14.5304 18 15.0391 17.7893 15.4142 17.4142C15.7893 17.0391 16 16.5304 16 16V7L13 2Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M13 2V7H16M10 11V15M8 13L10 11L12 13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Assigned Patients":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <rect x="3" y="4" width="14" height="14" rx="2" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M13 2V6M7 2V6M3 8H17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7 12H10M7 15H13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Upcoming Appointments":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <rect x="3" y="4" width="14" height="14" rx="2" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M13 2V6M7 2V6M3 8H17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Record Vitals":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M3 10H6L8 4L12 16L14 10H17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Daily Notes":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M4 4C4 2.89543 4.89543 2 6 2H10L16 8V16C16 17.1046 15.1046 18 14 18H6C4.89543 18 4 17.1046 4 16V4Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M10 2V8H16" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7 12H13M7 15H11" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Medication Rounds":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M11 2H5C4.46957 2 3.96086 2.21071 3.58579 2.58579C3.21071 2.96086 3 3.46957 3 4V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18H15C15.5304 18 16.0391 17.7893 16.4142 17.4142C16.7893 17.0391 17 16.5304 17 16V8L11 2Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M11 2V8H17M7 12H13M7 15H10" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
+    case "Help":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" stroke={iconColor} strokeWidth="1.5"/>
+          <path d="M7.5 7.5C7.5 6.11929 8.61929 5 10 5C11.3807 5 12.5 6.11929 12.5 7.5C12.5 8.88071 11.3807 10 10 10V11.5" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="10" cy="14" r="0.5" fill={iconColor} stroke={iconColor}/>
         </svg>
       )
     case "Notification":

@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export function PharmacistDashboardContent() {
+  const router = useRouter()
   const [pharmacyOpen, setPharmacyOpen] = useState(true)
   const [activeTab, setActiveTab] = useState("Daily")
   const [searchQuery, setSearchQuery] = useState("")
@@ -207,7 +209,11 @@ export function PharmacistDashboardContent() {
             </thead>
             <tbody>
               {paginatedPatients.map((patient, index) => (
-                <tr key={patient.id} className="border-b border-[#f8f9fa] hover:bg-[#f8f9fa] transition-colors">
+                <tr 
+                  key={patient.id} 
+                  className="border-b border-[#f8f9fa] hover:bg-[#f8f9fa] transition-colors cursor-pointer"
+                  onClick={() => router.push(`/pharmacist/patient/${patient.id}`)}
+                >
                   <td className="py-4 px-4 text-[14px] text-[#212529]">{patient.id}</td>
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-3">
@@ -223,7 +229,13 @@ export function PharmacistDashboardContent() {
                   <td className="py-4 px-4 text-[14px] text-[#212529]">{patient.prescriptions}</td>
                   <td className="py-4 px-4 text-[14px] text-[#6c757d]">{patient.date}</td>
                   <td className="py-4 px-4">
-                    <button className="text-[#6c757d] hover:text-[#212529] transition-colors">
+                    <button 
+                      className="text-[#6c757d] hover:text-[#212529] transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        router.push(`/pharmacist/patient/${patient.id}`)
+                      }}
+                    >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="6" r="2"/>
                         <circle cx="12" cy="12" r="2"/>
