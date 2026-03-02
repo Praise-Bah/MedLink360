@@ -2,7 +2,10 @@ from django.urls import path
 from .views import (
     RegisterView, whoami, RoleSwitchView, UserProfileView, UserRolesView,
     PatientProfileView, DoctorProfileView, NurseProfileView,
-    PharmacistProfileView, LabTechnicianProfileView, FacilityAdminProfileView
+    PharmacistProfileView, LabTechnicianProfileView, FacilityAdminProfileView,
+    AdminInvitationListCreateView, AdminInvitationDetailView,
+    AdminInvitationRevokeView, AdminInvitationVerifyView,
+    AdminInvitationAcceptView, AdminInvitationResendView
 )
 
 app_name = 'accounts'
@@ -22,4 +25,14 @@ urlpatterns = [
     path('profiles/pharmacist/', PharmacistProfileView.as_view(), name='pharmacist-profile'),
     path('profiles/lab-tech/', LabTechnicianProfileView.as_view(), name='lab-tech-profile'),
     path('profiles/facility-admin/', FacilityAdminProfileView.as_view(), name='facility-admin-profile'),
+    
+    # Admin Invitations (MoH admin access)
+    path('invitations/', AdminInvitationListCreateView.as_view(), name='invitation-list-create'),
+    path('invitations/<int:pk>/', AdminInvitationDetailView.as_view(), name='invitation-detail'),
+    path('invitations/revoke/', AdminInvitationRevokeView.as_view(), name='invitation-revoke'),
+    path('invitations/<int:pk>/resend/', AdminInvitationResendView.as_view(), name='invitation-resend'),
+    
+    # Public invitation endpoints (for invitees)
+    path('invitations/verify/', AdminInvitationVerifyView.as_view(), name='invitation-verify'),
+    path('invitations/accept/', AdminInvitationAcceptView.as_view(), name='invitation-accept'),
 ]

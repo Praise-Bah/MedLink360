@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from .models import (
     Role, PatientProfile, DoctorProfile, NurseProfile,
-    PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile
+    PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile, AdminInvitation
 )
 
 User = get_user_model()
@@ -258,3 +258,213 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'is_verified', 'verified_at', 'created_at', 'updated_at']
+
+
+# ============================================================================
+# Admin Invitation Serializers
+# ============================================================================
+
+class AdminInvitationSerializer(serializers.ModelSerializer):
+    """Serializer for AdminInvitation model"""
+    
+    role_display = serializers.CharField(source='get_role_display', read_only=True)
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
+    hospital_name = serializers.CharField(source='hospital.name', read_only=True, allow_null=True)
+    invited_by_email = serializers.EmailField(source='invited_by.email', read_only=True, allow_null=True)
+    invited_by_name = serializers.CharField(source='invited_by.full_name', read_only=True, allow_null=True)
+    is_valid = serializers.BooleanField(read_only=True)
+    is_expired = serializers.BooleanField(read_only=True)
+    
+    class Meta:
+        model = AdminInvitation
+        fields = [
+            'id', 'email', 'role', 'role_display', 'token',
+            'hospital', 'hospital_name',
+            'full_name', 'phone_number', 'message',
+            'invited_by', 'invited_by_email', 'invited_by_name',
+            'status', 'status_display',
+            'created_at', 'expires_at', 'accepted_at',
+            'revoked_at', 'revoked_by',
+            'is_valid', 'is_expired',
+            'metadata'
+        ]
+        read_only_fields = [
+            'id', 'token', 'invited_by', 'status',
+            'created_at', 'accepted_at', 'revoked_at', 'revoked_by'
+        ]
+
+
+class AdminInvitationCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating admin invitations (used by MoH admins)"""
+    
+    class Meta:
+        model = AdminInvitation
+        fields = [
+            'email', 'role', 'hospital',
+            'full_name', 'phone_number', 'message',
+            'expires_at', 'metadata'
+        ]
+    
+    def validate(self, attrs):
+        role = attrs.get('role')
+        hospital = attrs.get('hospital')
+        
+        # Hospital admin requires a hospital
+        if role == 'hospital_admin' and not hospital:
+            raise serializers.ValidationError({
+                "hospital": "Hospital is required for hospital_admin role."
+            })
+        
+        # Ministry admin should not have a hospital
+        if role == 'ministry_admin' and hospital:
+            raise serializers.ValidationError({
+                "hospital": "Ministry admin should not be associated with a specific hospital."
+            })
+        
+        # Check if email already has a pending invitation
+        email = attrs.get('email')
+        existing = AdminInvitation.objects.filter(
+            email=email,
+            status='pending'
+        ).exists()
+        if existing:
+            raise serializers.ValidationError({
+                "email": "A pending invitation already exists for this email."
+            })
+        
+        return attrs
+    
+    def create(self, validated_data):
+        # Set invited_by from request user
+        validated_data['invited_by'] = self.context['request'].user
+        return super().create(validated_data)
+
+
+class AdminInvitationVerifySerializer(serializers.Serializer):
+    """Serializer for verifying an invitation token"""
+    
+    token = serializers.CharField(required=True)
+    
+    def validate_token(self, value):
+        try:
+            invitation = AdminInvitation.objects.get(token=value)
+        except AdminInvitation.DoesNotExist:
+            raise serializers.ValidationError("Invalid invitation token.")
+        
+        if invitation.status != 'pending':
+            raise serializers.ValidationError(
+                f"This invitation has already been {invitation.status}."
+            )
+        
+        if invitation.is_expired:
+            raise serializers.ValidationError("This invitation has expired.")
+        
+        return value
+
+
+class AdminInvitationAcceptSerializer(serializers.Serializer):
+    """Serializer for accepting an invitation and creating account"""
+    
+    token = serializers.CharField(required=True)
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password_confirm = serializers.CharField(write_only=True, required=True)
+    first_name = serializers.CharField(required=True, max_length=150)
+    last_name = serializers.CharField(required=True, max_length=150)
+    phone_number = serializers.CharField(required=False, allow_blank=True, max_length=20)
+    
+    def validate(self, attrs):
+        # Validate passwords match
+        if attrs['password'] != attrs['password_confirm']:
+            raise serializers.ValidationError({"password": "Passwords don't match."})
+        
+        # Validate token
+        token = attrs.get('token')
+        try:
+            invitation = AdminInvitation.objects.select_related('hospital').get(token=token)
+        except AdminInvitation.DoesNotExist:
+            raise serializers.ValidationError({"token": "Invalid invitation token."})
+        
+        if not invitation.is_valid:
+            if invitation.is_expired:
+                raise serializers.ValidationError({"token": "This invitation has expired."})
+            raise serializers.ValidationError({"token": f"This invitation has been {invitation.status}."})
+        
+        # Check if email already registered
+        if User.objects.filter(email=invitation.email).exists():
+            raise serializers.ValidationError({
+                "email": "An account with this email already exists."
+            })
+        
+        attrs['invitation'] = invitation
+        return attrs
+    
+    def create(self, validated_data):
+        invitation = validated_data.pop('invitation')
+        validated_data.pop('password_confirm')
+        validated_data.pop('token')
+        
+        # Create user
+        user = User.objects.create_user(
+            email=invitation.email,
+            password=validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            phone_number=validated_data.get('phone_number', invitation.phone_number),
+            is_verified=True,  # Admin accounts are pre-verified
+        )
+        
+        # Set active role
+        user.active_role = invitation.role
+        user.save()
+        
+        # Create role
+        Role.objects.create(
+            user=user,
+            role_type=invitation.role,
+            is_verified=True
+        )
+        
+        # Create facility admin profile if hospital_admin
+        if invitation.role == 'hospital_admin':
+            FacilityAdminProfile.objects.create(
+                user=user,
+                position='Hospital Administrator'
+            )
+            
+            # Link user to hospital as admin via FacilityStaff
+            from facilities.models import FacilityStaff
+            from django.utils import timezone
+            FacilityStaff.objects.create(
+                user=user,
+                hospital=invitation.hospital,
+                role='admin',
+                position_title='Hospital Administrator',
+                start_date=timezone.now().date(),
+                is_active=True,
+                can_manage_appointments=True,
+                can_view_records=True
+            )
+        
+        # Mark invitation as accepted
+        invitation.accept(user)
+        
+        return user
+
+
+class AdminInvitationRevokeSerializer(serializers.Serializer):
+    """Serializer for revoking an invitation"""
+    
+    invitation_id = serializers.IntegerField(required=True)
+    
+    def validate_invitation_id(self, value):
+        try:
+            invitation = AdminInvitation.objects.get(id=value)
+        except AdminInvitation.DoesNotExist:
+            raise serializers.ValidationError("Invitation not found.")
+        
+        if invitation.status != 'pending':
+            raise serializers.ValidationError(
+                f"Cannot revoke an invitation that has been {invitation.status}."
+            )
+        
+        return value

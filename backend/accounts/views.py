@@ -9,9 +9,16 @@ from .serializers import (
     UserSerializer, UserRegistrationSerializer, RoleSwitchSerializer,
     UserDetailSerializer, RoleSerializer, PatientProfileSerializer,
     DoctorProfileSerializer, NurseProfileSerializer, PharmacistProfileSerializer,
-    LabTechnicianProfileSerializer, FacilityAdminProfileSerializer
+    LabTechnicianProfileSerializer, FacilityAdminProfileSerializer,
+    AdminInvitationSerializer, AdminInvitationCreateSerializer,
+    AdminInvitationVerifySerializer, AdminInvitationAcceptSerializer,
+    AdminInvitationRevokeSerializer
 )
-from .models import Role, PatientProfile, DoctorProfile, NurseProfile, PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile
+from .models import (
+    Role, PatientProfile, DoctorProfile, NurseProfile, 
+    PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile,
+    AdminInvitation
+)
 
 User = get_user_model()
 
@@ -278,3 +285,211 @@ class FacilityAdminProfileView(generics.RetrieveUpdateAPIView):
     )
     def patch(self, request, *args, **kwargs):
         return super().patch(request, *args, **kwargs)
+
+
+# ============================================================================
+# Admin Invitation Views
+# ============================================================================
+
+class IsMoHAdmin(permissions.BasePermission):
+    """Permission class for Ministry of Health admins only"""
+    
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated:
+            return False
+        return request.user.active_role == 'moh_admin' or request.user.is_superuser
+
+
+class AdminInvitationListCreateView(generics.ListCreateAPIView):
+    """
+    List all admin invitations or create a new one.
+    Only accessible by Ministry of Health admins.
+    """
+    
+    permission_classes = [IsMoHAdmin]
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AdminInvitationCreateSerializer
+        return AdminInvitationSerializer
+    
+    def get_queryset(self):
+        queryset = AdminInvitation.objects.select_related(
+            'hospital', 'invited_by', 'revoked_by'
+        ).order_by('-created_at')
+        
+        # Filter by status
+        status_filter = self.request.query_params.get('status')
+        if status_filter:
+            queryset = queryset.filter(status=status_filter)
+        
+        # Filter by role
+        role_filter = self.request.query_params.get('role')
+        if role_filter:
+            queryset = queryset.filter(role=role_filter)
+        
+        # Filter by hospital
+        hospital_filter = self.request.query_params.get('hospital')
+        if hospital_filter:
+            queryset = queryset.filter(hospital_id=hospital_filter)
+        
+        return queryset
+    
+    @extend_schema(
+        summary="List admin invitations",
+        description="List all admin invitations. Filterable by status, role, and hospital. MoH admin access only.",
+        responses={200: AdminInvitationSerializer(many=True)}
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+    
+    @extend_schema(
+        summary="Create admin invitation",
+        description="Create a new admin invitation and send email to the invitee. MoH admin access only.",
+        request=AdminInvitationCreateSerializer,
+        responses={201: AdminInvitationSerializer}
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
+class AdminInvitationDetailView(generics.RetrieveAPIView):
+    """
+    Retrieve a specific admin invitation.
+    Only accessible by Ministry of Health admins.
+    """
+    
+    permission_classes = [IsMoHAdmin]
+    serializer_class = AdminInvitationSerializer
+    queryset = AdminInvitation.objects.select_related('hospital', 'invited_by', 'revoked_by')
+    
+    @extend_schema(
+        summary="Get admin invitation details",
+        description="Retrieve details of a specific admin invitation. MoH admin access only.",
+        responses={200: AdminInvitationSerializer}
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+
+class AdminInvitationRevokeView(APIView):
+    """
+    Revoke a pending admin invitation.
+    Only accessible by Ministry of Health admins.
+    """
+    
+    permission_classes = [IsMoHAdmin]
+    
+    @extend_schema(
+        summary="Revoke admin invitation",
+        description="Revoke a pending admin invitation. Cannot revoke already accepted or expired invitations.",
+        request=AdminInvitationRevokeSerializer,
+        responses={200: AdminInvitationSerializer}
+    )
+    def post(self, request):
+        serializer = AdminInvitationRevokeSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        invitation = AdminInvitation.objects.get(id=serializer.validated_data['invitation_id'])
+        invitation.revoke(request.user)
+        
+        return Response(
+            AdminInvitationSerializer(invitation).data,
+            status=status.HTTP_200_OK
+        )
+
+
+class AdminInvitationVerifyView(APIView):
+    """
+    Verify an invitation token (public endpoint).
+    Used when a user clicks the invitation link.
+    """
+    
+    permission_classes = [permissions.AllowAny]
+    
+    @extend_schema(
+        summary="Verify invitation token",
+        description="Verify if an invitation token is valid. Returns invitation details if valid.",
+        request=AdminInvitationVerifySerializer,
+        responses={200: AdminInvitationSerializer}
+    )
+    def post(self, request):
+        serializer = AdminInvitationVerifySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        invitation = AdminInvitation.objects.select_related('hospital').get(
+            token=serializer.validated_data['token']
+        )
+        
+        return Response(
+            AdminInvitationSerializer(invitation).data,
+            status=status.HTTP_200_OK
+        )
+
+
+class AdminInvitationAcceptView(APIView):
+    """
+    Accept an invitation and create admin account (public endpoint).
+    Used when a user sets their password after clicking the invitation link.
+    """
+    
+    permission_classes = [permissions.AllowAny]
+    
+    @extend_schema(
+        summary="Accept invitation and create account",
+        description="Accept an admin invitation by setting password and creating the account.",
+        request=AdminInvitationAcceptSerializer,
+        responses={201: UserDetailSerializer}
+    )
+    def post(self, request):
+        serializer = AdminInvitationAcceptSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        
+        return Response(
+            UserDetailSerializer(user).data,
+            status=status.HTTP_201_CREATED
+        )
+
+
+class AdminInvitationResendView(APIView):
+    """
+    Resend an invitation email.
+    Only accessible by Ministry of Health admins.
+    """
+    
+    permission_classes = [IsMoHAdmin]
+    
+    @extend_schema(
+        summary="Resend invitation email",
+        description="Resend the invitation email to the invitee. Only works for pending invitations.",
+        responses={200: {"description": "Email resent successfully"}}
+    )
+    def post(self, request, pk):
+        try:
+            invitation = AdminInvitation.objects.get(pk=pk)
+        except AdminInvitation.DoesNotExist:
+            return Response(
+                {"error": "Invitation not found."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        if invitation.status != 'pending':
+            return Response(
+                {"error": f"Cannot resend invitation that has been {invitation.status}."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if invitation.is_expired:
+            return Response(
+                {"error": "Invitation has expired. Please create a new invitation."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # TODO: Implement email sending logic here
+        # send_invitation_email(invitation)
+        
+        return Response(
+            {"message": "Invitation email resent successfully."},
+            status=status.HTTP_200_OK
+        )

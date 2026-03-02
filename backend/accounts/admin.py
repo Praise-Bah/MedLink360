@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from .models import (
     User, Role, PatientProfile, DoctorProfile, NurseProfile,
-    PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile
+    PharmacistProfile, LabTechnicianProfile, FacilityAdminProfile, AdminInvitation
 )
 
 
@@ -129,4 +129,26 @@ class FacilityAdminProfileAdmin(admin.ModelAdmin):
         (_('Limits'), {'fields': ('max_staff_accounts',)}),
         (_('Timestamps'), {'fields': ('created_at', 'updated_at')}),
     )
+
+
+@admin.register(AdminInvitation)
+class AdminInvitationAdmin(admin.ModelAdmin):
+    """Admin invitation admin for tracking invitation links"""
+    
+    list_display = ['email', 'role', 'hospital', 'status', 'invited_by', 'created_at', 'expires_at']
+    list_filter = ['role', 'status', 'created_at']
+    search_fields = ['email', 'full_name', 'hospital__name', 'invited_by__email']
+    readonly_fields = ['token', 'created_at', 'accepted_at', 'revoked_at']
+    raw_id_fields = ['hospital', 'invited_by', 'revoked_by']
+    
+    fieldsets = (
+        (_('Invitation Details'), {'fields': ('email', 'role', 'hospital', 'full_name', 'phone_number')}),
+        (_('Token & Status'), {'fields': ('token', 'status', 'message')}),
+        (_('Tracking'), {'fields': ('invited_by', 'created_at', 'expires_at', 'accepted_at')}),
+        (_('Revocation'), {'fields': ('revoked_at', 'revoked_by')}),
+        (_('Metadata'), {'fields': ('metadata',)}),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('hospital', 'invited_by', 'revoked_by')
 

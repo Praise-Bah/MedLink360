@@ -329,3 +329,124 @@ class FacilityAdminProfile(models.Model):
     
     def __str__(self):
         return f"Admin {self.user.full_name} - {self.position}"
+
+
+class AdminInvitation(models.Model):
+    """
+    Tracks invitation links sent to hospital admins and ministry admins.
+    These accounts are not self-registered but created via invitation by authorized personnel.
+    """
+    
+    ROLE_CHOICES = [
+        ('hospital_admin', 'Hospital Administrator'),
+        ('ministry_admin', 'Ministry of Health Administrator'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('expired', 'Expired'),
+        ('revoked', 'Revoked'),
+    ]
+    
+    # Invitation details
+    email = models.EmailField(help_text="Email address to send the invitation")
+    role = models.CharField(max_length=50, choices=ROLE_CHOICES)
+    token = models.CharField(max_length=255, unique=True, help_text="Unique token for invitation link")
+    
+    # Hospital association (only for hospital_admin role)
+    hospital = models.ForeignKey(
+        'facilities.Hospital',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='admin_invitations',
+        help_text="Hospital this admin will manage (required for hospital_admin role)"
+    )
+    
+    # Invitee information
+    full_name = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
+    message = models.TextField(blank=True, help_text="Optional message to include in invitation email")
+    
+    # Tracking
+    invited_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='invitations_sent',
+        help_text="User who sent this invitation"
+    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField(help_text="Invitation expiration timestamp")
+    accepted_at = models.DateTimeField(null=True, blank=True)
+    
+    # Revocation
+    revoked_at = models.DateTimeField(null=True, blank=True)
+    revoked_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='invitations_revoked'
+    )
+    
+    # Additional metadata
+    metadata = models.JSONField(default=dict, blank=True)
+    
+    class Meta:
+        db_table = 'admin_invitations'
+        verbose_name = _('admin invitation')
+        verbose_name_plural = _('admin invitations')
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['email']),
+            models.Index(fields=['token']),
+            models.Index(fields=['status']),
+            models.Index(fields=['hospital']),
+        ]
+    
+    def __str__(self):
+        return f"Invitation for {self.email} as {self.get_role_display()}"
+    
+    @property
+    def is_expired(self):
+        from django.utils import timezone
+        return timezone.now() > self.expires_at
+    
+    @property
+    def is_valid(self):
+        return self.status == 'pending' and not self.is_expired
+    
+    def save(self, *args, **kwargs):
+        # Generate token if not set
+        if not self.token:
+            import secrets
+            self.token = secrets.token_urlsafe(32)
+        
+        # Set default expiration (7 days from creation)
+        if not self.expires_at:
+            from django.utils import timezone
+            from datetime import timedelta
+            self.expires_at = timezone.now() + timedelta(days=7)
+        
+        super().save(*args, **kwargs)
+    
+    def accept(self, user):
+        """Mark invitation as accepted and link to user"""
+        from django.utils import timezone
+        self.status = 'accepted'
+        self.accepted_at = timezone.now()
+        self.save()
+        return user
+    
+    def revoke(self, revoked_by_user):
+        """Revoke this invitation"""
+        from django.utils import timezone
+        self.status = 'revoked'
+        self.revoked_at = timezone.now()
+        self.revoked_by = revoked_by_user
+        self.save()
