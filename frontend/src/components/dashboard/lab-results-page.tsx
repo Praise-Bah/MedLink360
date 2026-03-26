@@ -1,6 +1,9 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+
 export function LabResultsPage() {
+  const router = useRouter()
   const results = [
     {
       title: "Blood Test",
@@ -37,7 +40,10 @@ export function LabResultsPage() {
                 <p className="text-[11px] text-[#5c5c5c]">Report Date</p>
                 <p className="text-[13px] font-medium text-[#212529]">{item.reportDate}</p>
               </div>
-              <button className="p-2 hover:bg-[#f1f5f9] rounded-lg">
+              <button 
+                onClick={() => router.push('/medical-book/lab-result/blood-test')}
+                className="p-2 hover:bg-[#f1f5f9] rounded-lg"
+              >
                 <svg className="w-4 h-4 text-[#5c5c5c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

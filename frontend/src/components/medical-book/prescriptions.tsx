@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface Prescription {
   id: number
@@ -59,6 +59,14 @@ export function PrescriptionsPage() {
   const [selectedPrescription, setSelectedPrescription] = useState<Prescription | null>(null)
   const [showSuccess, setShowSuccess] = useState(false)
   const [successDrug, setSuccessDrug] = useState("")
+  const [userRole, setUserRole] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const role = window.localStorage.getItem("selectedRole")
+      setUserRole(role)
+    }
+  }, [])
 
   const pendingPrescriptions = prescriptions.filter(p => p.status === "pending")
   const prescribedPrescriptions = prescriptions.filter(p => p.status === "prescribed")
@@ -153,12 +161,18 @@ export function PrescriptionsPage() {
                       </div>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleConfirmClick(item)}
-                    className="h-9 px-4 bg-[#212529] text-white text-[12px] rounded-lg hover:bg-[#000] transition-colors flex-shrink-0"
-                  >
-                    Confirm Prescriptions
-                  </button>
+                  {userRole === "doctor" ? (
+                    <button
+                      onClick={() => handleConfirmClick(item)}
+                      className="h-9 px-4 bg-[#212529] text-white text-[12px] rounded-lg hover:bg-[#000] transition-colors flex-shrink-0"
+                    >
+                      Confirm Prescriptions
+                    </button>
+                  ) : (
+                    <span className="h-9 px-4 border border-[#ffc107] bg-[#fff3cd] text-[#856404] text-[12px] rounded-lg flex items-center">
+                      Pending
+                    </span>
+                  )}
                 </div>
                 {index < pendingPrescriptions.length - 1 && (
                   <div className="mt-5 border-t border-[#f1f3f5]"></div>
@@ -228,7 +242,7 @@ export function PrescriptionsPage() {
       </div>
 
       {/* Confirm Prescription Modal */}
-      {selectedPrescription && (
+      {userRole === "doctor" && selectedPrescription && (
         <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-6">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-[600px]">
             {/* Modal Header */}

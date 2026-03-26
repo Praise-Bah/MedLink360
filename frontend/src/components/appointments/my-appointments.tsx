@@ -142,12 +142,6 @@ export function MyAppointments() {
 
   return (
     <div className="w-full max-w-none">
-      {/* Welcome Header */}
-      <div className="mb-6">
-        <h1 className="text-[28px] font-bold text-[#212529]">Welcome DR John Carter,</h1>
-        <p className="text-[14px] text-[#6c757d]">I hope you're in a good mood because there are 56 patients waiting for you</p>
-      </div>
-
       <div className="flex gap-6">
         {/* Left Column - Schedule Lists */}
         <div className="flex-1">
@@ -257,102 +251,6 @@ export function MyAppointments() {
           </div>
         </div>
 
-        {/* Right Column - New Appointments & Requests */}
-        <div className="w-[400px] shrink-0 space-y-6">
-          {/* New Appointments Stats */}
-          <div className="bg-[#f8f9fa] rounded-lg shadow-sm border border-[#e7e8eb] p-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-[#f8f9fa] border border-[#e7e8eb] rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-              </div>
-              <div className="flex-1">
-                <p className="text-[14px] text-[#212529] mb-1">New Appointments</p>
-                <p className="text-[24px] font-semibold text-[#212529]">56</p>
-                <div className="flex items-center gap-1 mt-1">
-                  <span className="text-[10px] text-[#6c757d]">This week</span>
-                  <div className="flex items-center gap-1">
-                    <svg className="w-3 h-3 text-[#28a745]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                    </svg>
-                    <span className="text-[10px] text-[#28a745]">20%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Appoint Request Section */}
-          <div className="bg-white rounded-xl border border-[#e7e8eb] p-4">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[18px] font-semibold text-[#212529]">Appoint Request</h3>
-              <button className="text-[12px] text-[#007bff] hover:underline">See All</button>
-            </div>
-
-            <div className="space-y-3">
-              {/* Appointment Request Cards */}
-              <div className="bg-white border border-[#6c757d] rounded-lg p-4">
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-full border-2 border-[rgba(159,98,44,0.83)] bg-[rgba(159,98,44,0.69)] overflow-hidden flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#6c757d]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-[14px] font-bold text-[#212529]">Uthman ibn Hunaif</h4>
-                    <p className="text-[12px] font-medium text-[#212529]">6th Feb, 10:00 am - 11:45 am</p>
-                    <p className="text-[12px] text-[#212529]">Individual counselling</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <button className="flex items-center gap-1.5 px-4 py-2 bg-[rgba(220,53,69,0.34)] border border-[#dc3545] text-[#dc3545] rounded-lg text-[14px] font-normal hover:bg-[rgba(220,53,69,0.5)] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                    Rejected
-                  </button>
-                  <button className="flex items-center gap-1.5 px-4 py-2 bg-[rgba(255,193,7,0.17)] border border-[#ffc107] text-[#ffc107] rounded-lg text-[14px] font-normal hover:bg-[rgba(255,193,7,0.3)] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Pending
-                  </button>
-                </div>
-              </div>
-
-              <div className="bg-white border border-[#6c757d] rounded-lg p-4">
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-full border-2 border-[rgba(69,127,47,0.7)] bg-[rgba(69,127,47,0.3)] overflow-hidden flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#6c757d]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-[14px] font-bold text-[#212529]">Uthman ibn Hunaif</h4>
-                    <p className="text-[12px] font-medium text-[#212529]">6th Feb, 10:00 am - 11:45 am</p>
-                    <p className="text-[12px] text-[#212529]">Individual counselling</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <button className="flex items-center gap-1.5 px-4 py-2 bg-[rgba(220,53,69,0.34)] border border-[#dc3545] text-[#dc3545] rounded-lg text-[14px] font-normal hover:bg-[rgba(220,53,69,0.5)] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                    Rejected
-                  </button>
-                  <button className="flex items-center gap-1.5 px-4 py-2 bg-[rgba(255,193,7,0.17)] border border-[#ffc107] text-[#ffc107] rounded-lg text-[14px] font-normal hover:bg-[rgba(255,193,7,0.3)] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Pending
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   )
