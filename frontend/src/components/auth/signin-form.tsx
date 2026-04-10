@@ -80,7 +80,9 @@ export function SigninForm() {
             href="/"
             className="absolute left-6 top-6 inline-flex items-center gap-2 text-white/90"
           >
-            <img src="/auth/icon-back.png" alt="" className="h-4 w-4" />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             <span className="text-lg font-medium">Back</span>
           </Link>
           <div className="absolute bottom-6 left-6 right-6 rounded-xl border border-white/20 bg-gradient-to-b from-white/10 to-sky-300/20 px-5 py-4 backdrop-blur-sm">
@@ -117,7 +119,9 @@ export function SigninForm() {
                     errors.email ? "border-red-200" : "border-[color:var(--border-light)]"
                   } bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]`}
                 >
-                  <img src="/auth/icon-mail.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                  </svg>
                   <input
                     type="email"
                     value={email}
@@ -143,7 +147,9 @@ export function SigninForm() {
                     errors.password ? "border-red-200" : "border-[color:var(--border-light)]"
                   } bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]`}
                 >
-                  <img src="/auth/icon-lock.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
                   <input
                     type="password"
                     value={password}
@@ -156,7 +162,9 @@ export function SigninForm() {
                     aria-invalid={Boolean(errors.password)}
                     required
                   />
-                  <img src="/auth/icon-eye-off.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                  </svg>
                 </div>
                 {errors.password && (
                   <p className="text-[12px] text-red-500">{errors.password}</p>

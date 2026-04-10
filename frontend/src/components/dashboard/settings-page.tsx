@@ -33,6 +33,10 @@ export function SettingsPage() {
   const [userRole, setUserRole] = useState<string | null>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [hasUploadedID, setHasUploadedID] = useState(false) // Track if patient uploaded ID during signup
+  const [selectedDocType, setSelectedDocType] = useState("national-id")
+  const [frontDocFile, setFrontDocFile] = useState<File | null>(null)
+  const [backDocFile, setBackDocFile] = useState<File | null>(null)
+  const [selfieFile, setSelfieFile] = useState<File | null>(null)
   
   useEffect(() => {
     const role = localStorage.getItem("selectedRole")
@@ -107,12 +111,12 @@ export function SettingsPage() {
   ]
 
   return (
-    <div className="max-w-[1000px] mx-auto">
+    <div className="max-w-[1000px] mx-auto px-4 sm:px-0">
       {/* Header */}
       <h1 className="text-[28px] font-semibold text-[#212529] mb-6">Settings</h1>
 
       {/* Tabs */}
-      <div className="flex mb-8 bg-[#f8f9fa] rounded-lg p-1 w-fit">
+      <div className="inline-flex flex-wrap gap-2 mb-8 bg-[#f8f9fa] rounded-lg p-1">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -137,7 +141,7 @@ export function SettingsPage() {
               <h2 className="text-[20px] font-semibold text-[#212529]">Your Profile Pic</h2>
               <p className="text-[14px] text-[#6c757d]">This will be displayed on your profile.</p>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="w-[80px] h-[80px] rounded-full bg-[#e9ecef] overflow-hidden">
                 <img 
                   src="/doctor-avatar.png" 
@@ -148,7 +152,7 @@ export function SettingsPage() {
                   }}
                 />
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 <button className="px-4 py-2 border border-[#e7e8eb] rounded-lg text-[14px] font-medium text-[#212529] hover:bg-[#f8f9fa] transition-colors">
                   Upload new Photo
                 </button>
@@ -161,8 +165,8 @@ export function SettingsPage() {
 
           {/* Personal Info Section */}
           <div className="border-b border-[#e7e8eb] pb-6">
-            <div className="flex gap-8">
-              <div className="w-[200px] shrink-0">
+            <div className="flex flex-col md:flex-row md:gap-8">
+              <div className="md:w-[200px] w-full shrink-0">
                 <h2 className="text-[20px] font-semibold text-[#212529]">Personal Info</h2>
                 <p className="text-[14px] text-[#6c757d]">Add your personal info</p>
               </div>
@@ -179,7 +183,7 @@ export function SettingsPage() {
                   </button>
                 </div>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[14px] font-medium text-[#212529] mb-1">
                       First Name <span className="text-red-500">*</span>
@@ -205,7 +209,7 @@ export function SettingsPage() {
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[14px] font-medium text-[#212529] mb-1">
                       Phone Number <span className="text-red-500">*</span>
@@ -285,8 +289,8 @@ export function SettingsPage() {
           {/* ID Verification Section - Only show for patients who haven't uploaded ID */}
           {userRole === "patient" && !hasUploadedID && (
             <div className="border-b border-[#e7e8eb] pb-6">
-              <div className="flex gap-8">
-                <div className="w-[200px] shrink-0">
+              <div className="flex flex-col md:flex-row md:gap-8">
+                <div className="md:w-[200px] w-full shrink-0">
                   <h2 className="text-[20px] font-semibold text-[#212529]">ID Verification</h2>
                   <p className="text-[14px] text-[#6c757d]">Complete your identity verification</p>
                 </div>
@@ -294,46 +298,94 @@ export function SettingsPage() {
                   {/* Document Type Selection */}
                   <div>
                     <label className="block text-[14px] font-medium text-[#212529] mb-3">Select Document Type</label>
-                    <div className="grid grid-cols-3 gap-4">
-                      <button className="p-4 border-2 border-[#007bff] bg-[#f8f9ff] rounded-lg text-center hover:bg-[#e6f3ff] transition-colors">
-                        <div className="w-8 h-8 mx-auto mb-2 text-[#007bff]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                      <button 
+                        onClick={() => setSelectedDocType("national-id")}
+                        className={`p-4 border-2 rounded-lg text-center hover:bg-[#e6f3ff] transition-colors ${
+                          selectedDocType === "national-id" 
+                            ? "border-[#007bff] bg-[#f8f9ff]" 
+                            : "border-[#e7e8eb] hover:border-[#007bff] hover:bg-[#f8f9ff]"
+                        }`}
+                      >
+                        <div className={`w-8 h-8 mx-auto mb-2 ${
+                          selectedDocType === "national-id" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>
                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                           </svg>
                         </div>
-                        <p className="text-[12px] font-medium text-[#007bff]">National ID</p>
+                        <p className={`text-[12px] font-medium ${
+                          selectedDocType === "national-id" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>National ID</p>
                       </button>
-                      <button className="p-4 border border-[#e7e8eb] rounded-lg text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors">
-                        <div className="w-8 h-8 mx-auto mb-2 text-[#6c757d]">
+                      <button 
+                        onClick={() => setSelectedDocType("passport")}
+                        className={`p-4 border-2 rounded-lg text-center hover:bg-[#e6f3ff] transition-colors ${
+                          selectedDocType === "passport" 
+                            ? "border-[#007bff] bg-[#f8f9ff]" 
+                            : "border-[#e7e8eb] hover:border-[#007bff] hover:bg-[#f8f9ff]"
+                        }`}
+                      >
+                        <div className={`w-8 h-8 mx-auto mb-2 ${
+                          selectedDocType === "passport" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>
                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                           </svg>
                         </div>
-                        <p className="text-[12px] text-[#6c757d]">Passport</p>
+                        <p className={`text-[12px] font-medium ${
+                          selectedDocType === "passport" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>Passport</p>
                       </button>
-                      <button className="p-4 border border-[#e7e8eb] rounded-lg text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors">
-                        <div className="w-8 h-8 mx-auto mb-2 text-[#6c757d]">
+                      <button 
+                        onClick={() => setSelectedDocType("drivers-license")}
+                        className={`p-4 border-2 rounded-lg text-center hover:bg-[#e6f3ff] transition-colors ${
+                          selectedDocType === "drivers-license" 
+                            ? "border-[#007bff] bg-[#f8f9ff]" 
+                            : "border-[#e7e8eb] hover:border-[#007bff] hover:bg-[#f8f9ff]"
+                        }`}
+                      >
+                        <div className={`w-8 h-8 mx-auto mb-2 ${
+                          selectedDocType === "drivers-license" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>
                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
                         </div>
-                        <p className="text-[12px] text-[#6c757d]">Driver's License</p>
+                        <p className={`text-[12px] font-medium ${
+                          selectedDocType === "drivers-license" ? "text-[#007bff]" : "text-[#6c757d]"
+                        }`}>Driver's License</p>
                       </button>
                     </div>
                   </div>
 
                   {/* Document Upload Areas */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Front of Document */}
                     <div>
                       <label className="block text-[14px] font-medium text-[#212529] mb-2">Front of Document</label>
-                      <div className="border-2 border-dashed border-[#e7e8eb] rounded-lg p-6 text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors cursor-pointer">
+                      <input 
+                        type="file" 
+                        id="front-doc-upload"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) setFrontDocFile(file)
+                        }}
+                        className="hidden"
+                      />
+                      <div 
+                        onClick={() => document.getElementById('front-doc-upload')?.click()}
+                        className="border-2 border-dashed border-[#e7e8eb] rounded-lg p-6 text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors cursor-pointer"
+                      >
                         <div className="w-12 h-12 mx-auto mb-3 bg-[#f8f9fa] rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                           </svg>
                         </div>
-                        <p className="text-[14px] font-medium text-[#212529] mb-1">Upload Front</p>
+                        <p className="text-[14px] font-medium text-[#212529] mb-1">
+                          {frontDocFile ? frontDocFile.name : "Upload Front"}
+                        </p>
                         <p className="text-[12px] text-[#6c757d]">PNG, JPG up to 10MB</p>
                       </div>
                     </div>
@@ -341,13 +393,28 @@ export function SettingsPage() {
                     {/* Back of Document */}
                     <div>
                       <label className="block text-[14px] font-medium text-[#212529] mb-2">Back of Document</label>
-                      <div className="border-2 border-dashed border-[#e7e8eb] rounded-lg p-6 text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors cursor-pointer">
+                      <input 
+                        type="file" 
+                        id="back-doc-upload"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) setBackDocFile(file)
+                        }}
+                        className="hidden"
+                      />
+                      <div 
+                        onClick={() => document.getElementById('back-doc-upload')?.click()}
+                        className="border-2 border-dashed border-[#e7e8eb] rounded-lg p-6 text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors cursor-pointer"
+                      >
                         <div className="w-12 h-12 mx-auto mb-3 bg-[#f8f9fa] rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                           </svg>
                         </div>
-                        <p className="text-[14px] font-medium text-[#212529] mb-1">Upload Back</p>
+                        <p className="text-[14px] font-medium text-[#212529] mb-1">
+                          {backDocFile ? backDocFile.name : "Upload Back"}
+                        </p>
                         <p className="text-[12px] text-[#6c757d]">PNG, JPG up to 10MB</p>
                       </div>
                     </div>
@@ -356,6 +423,17 @@ export function SettingsPage() {
                   {/* Selfie Verification */}
                   <div>
                     <label className="block text-[14px] font-medium text-[#212529] mb-2">Selfie Verification</label>
+                    <input 
+                      type="file" 
+                      id="selfie-upload"
+                      accept="image/*"
+                      capture="user"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0]
+                        if (file) setSelfieFile(file)
+                      }}
+                      className="hidden"
+                    />
                     <div className="border-2 border-dashed border-[#e7e8eb] rounded-lg p-6 text-center hover:border-[#007bff] hover:bg-[#f8f9ff] transition-colors cursor-pointer">
                       <div className="w-16 h-16 mx-auto mb-3 bg-[#f8f9fa] rounded-full flex items-center justify-center">
                         <svg className="w-8 h-8 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -363,10 +441,15 @@ export function SettingsPage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                       </div>
-                      <h3 className="text-[14px] font-medium text-[#212529] mb-1">Take a Selfie</h3>
+                      <h3 className="text-[14px] font-medium text-[#212529] mb-1">
+                        {selfieFile ? selfieFile.name : "Take a Selfie"}
+                      </h3>
                       <p className="text-[12px] text-[#6c757d] mb-3">Make sure your face is clearly visible and matches your ID</p>
-                      <button className="px-4 py-2 bg-[#007bff] text-white rounded-lg text-[12px] font-medium hover:bg-[#0056b3] transition-colors">
-                        Take Photo
+                      <button 
+                        onClick={() => document.getElementById('selfie-upload')?.click()}
+                        className="px-4 py-2 bg-[#007bff] text-white rounded-lg text-[12px] font-medium hover:bg-[#0056b3] transition-colors"
+                      >
+                        {selfieFile ? "Change Photo" : "Take Photo"}
                       </button>
                     </div>
                   </div>
@@ -396,13 +479,13 @@ export function SettingsPage() {
 
           {/* Bio & Other Info Section */}
           <div className="border-b border-[#e7e8eb] pb-6">
-            <div className="flex gap-8">
-              <div className="w-[200px] shrink-0">
+            <div className="flex flex-col md:flex-row md:gap-8">
+              <div className="md:w-[200px] w-full shrink-0">
                 <h2 className="text-[20px] font-semibold text-[#212529]">Bio & Other info</h2>
                 <p className="text-[14px] text-[#6c757d]">Add your bio & other info</p>
               </div>
               <div className="flex-1 space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[14px] font-medium text-[#212529] mb-1">Address 1</label>
                     <input
@@ -442,12 +525,12 @@ export function SettingsPage() {
 
           {/* Account Security Section */}
           <div className="pt-2">
-            <div className="flex gap-8 items-center">
-              <div className="w-[200px] shrink-0">
+            <div className="flex flex-col gap-4 md:flex-row md:gap-8 md:items-center">
+              <div className="md:w-[200px] w-full shrink-0">
                 <h2 className="text-[20px] font-bold text-[#212529]">Account Security</h2>
                 <p className="text-[14px] text-[#6c757d]">manage account security.</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-3">
                 <button 
                   onClick={() => router.push("/signup")}
                   className="flex items-center gap-2 px-4 py-2 text-[14px] font-medium text-[#212529] hover:bg-[#f8f9fa] rounded-lg transition-colors"
@@ -474,14 +557,14 @@ export function SettingsPage() {
         <div className="space-y-8">
           {/* Email Notifications */}
           <div className="border-b border-[#e7e8eb] pb-8">
-            <div className="flex gap-8">
-              <div className="w-[250px] shrink-0">
+            <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+              <div className="md:w-[250px] w-full shrink-0">
                 <h2 className="text-[20px] font-semibold text-[#212529]">Email Notifications</h2>
                 <p className="text-[14px] text-[#6c757d]">Get update and reminder email sent to your email</p>
               </div>
               <div className="flex-1 space-y-4">
                 {notificationItems.map((item) => (
-                  <div key={item.key} className="flex items-center justify-between">
+                  <div key={item.key} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div className="pl-4">
                       <p className="text-[16px] font-medium text-[#212529]">{item.label}</p>
                       <p className="text-[14px] text-[#575757]">{item.desc}</p>
@@ -501,14 +584,14 @@ export function SettingsPage() {
 
           {/* Push Notifications */}
           <div>
-            <div className="flex gap-8">
-              <div className="w-[250px] shrink-0">
+            <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+              <div className="md:w-[250px] w-full shrink-0">
                 <h2 className="text-[20px] font-semibold text-[#212529]">Push Notifications</h2>
                 <p className="text-[14px] text-[#6c757d]">Receive alert on your mobile devices</p>
               </div>
               <div className="flex-1 space-y-4">
                 {pushNotificationItems.map((item) => (
-                  <div key={item.key} className="flex items-center justify-between">
+                  <div key={item.key} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div className="pl-4">
                       <p className="text-[16px] font-medium text-[#212529]">{item.label}</p>
                       <p className="text-[14px] text-[#575757]">{item.desc}</p>

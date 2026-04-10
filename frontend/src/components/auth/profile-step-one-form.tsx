@@ -49,7 +49,9 @@ export function ProfileStepOneForm() {
             href="/account-created"
             className="absolute left-6 top-6 inline-flex items-center gap-2 text-white/90"
           >
-            <img src="/auth/icon-back.png" alt="" className="h-4 w-4" />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             <span className="text-lg font-medium">Back</span>
           </Link>
           <div className="absolute bottom-6 left-6 right-6 rounded-xl border border-white/20 bg-gradient-to-b from-white/10 to-sky-300/20 px-5 py-4 backdrop-blur-sm">
@@ -85,7 +87,9 @@ export function ProfileStepOneForm() {
                     First Name
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-user.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
                     <input
                       type="text"
                       value={formData.firstName}
@@ -102,7 +106,9 @@ export function ProfileStepOneForm() {
                     Last Name
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-user.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
                     <input
                       type="text"
                       value={formData.lastName}
@@ -121,7 +127,9 @@ export function ProfileStepOneForm() {
                     Email Address
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-mail-line.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                     <input
                       type="email"
                       value={formData.email}
@@ -138,7 +146,9 @@ export function ProfileStepOneForm() {
                     Phone Number
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-phone-line.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
                     <input
                       type="tel"
                       value={formData.phone}
@@ -157,7 +167,9 @@ export function ProfileStepOneForm() {
                     Date of Birth
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                     <input
                       type="text"
                       value={formData.dateOfBirth}
@@ -174,7 +186,9 @@ export function ProfileStepOneForm() {
                     Gender
                   </label>
                   <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                    <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                    <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                     <select
                       value={formData.gender}
                       onChange={(event) => handleChange("gender", event.target.value)}
@@ -197,7 +211,9 @@ export function ProfileStepOneForm() {
                   ITIN / National ID
                 </label>
                 <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                  <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <input
                     type="text"
                     value={formData.itin}

@@ -49,7 +49,9 @@ export function RoleSelection() {
     <div className="min-h-screen bg-[color:var(--background)] px-6 py-12">
       <div className="mx-auto w-full max-w-[1253px] rounded-[23px] border border-[color:var(--border-light)] bg-white px-7 py-12 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
         <Link href="/entry" className="inline-flex items-center gap-2 text-[20px] text-[#212529]">
-          <img src="/auth/icon-back-dark.png" alt="" className="h-4 w-4" />
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
           <span className="font-medium">Back</span>
         </Link>
 

@@ -62,6 +62,17 @@ const navigationItems: NavItem[] = [
   { label: "Patients", href: "/patients", icon: "", roles: ["lab-technician"] },
   { label: "Notification", href: "/notifications", icon: "", roles: ["lab-technician"] },
   { label: "Settings", href: "/settings", icon: "", roles: ["lab-technician"] },
+  // Hospital Admin specific - MAIN section
+  { label: "Dashboard", href: "/dashboard", icon: "", roles: ["hospital-admin"] },
+  { label: "Staff Management", href: "/admin/staff", icon: "", roles: ["hospital-admin"] },
+  { label: "Patient Records", href: "/admin/patients", icon: "", roles: ["hospital-admin"] },
+  { label: "Appointments", href: "/admin/appointments", icon: "", roles: ["hospital-admin"] },
+  { label: "Departments", href: "/admin/departments", icon: "", roles: ["hospital-admin"] },
+  { label: "Laboratory", href: "/admin/laboratory", icon: "", roles: ["hospital-admin"] },
+  { label: "Reports", href: "/admin/reports", icon: "", roles: ["hospital-admin"] },
+  // Hospital Admin specific - RECORD section
+  { label: "Notification", href: "/notifications", icon: "", roles: ["hospital-admin"] },
+  { label: "Settings", href: "/settings", icon: "", roles: ["hospital-admin"] },
 ]
 
 function getNavIcon(label: string, isActive: boolean) {
@@ -152,17 +163,20 @@ function getNavIcon(label: string, isActive: boolean) {
     case "Pending Prescriptions":
       return (
         <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
-          <path d="M11 2H5C4.46957 2 3.96086 2.21071 3.58579 2.58579C3.21071 2.96086 3 3.46957 3 4V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18H15C15.5304 18 16.0391 17.7893 16.4142 17.4142C16.7893 17.0391 17 16.5304 17 16V8L11 2Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M11 2V8H17M9 12H15M9 15H13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <circle cx="6" cy="12" r="1" fill={iconColor}/>
-          <circle cx="6" cy="15" r="1" fill={iconColor}/>
+          <path d="M16.5 9.5L13.5 12.5C12.9 13.1 11.9 13.1 11.3 12.5L7.5 8.7C6.9 8.1 6.9 7.1 7.5 6.5L10.5 3.5C11.1 2.9 12.1 2.9 12.7 3.5L16.5 7.3C17.1 7.9 17.1 8.9 16.5 9.5Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 8L14 6" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M3 17L7 13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="3" cy="17" r="1.5" stroke={iconColor} strokeWidth="1.5"/>
         </svg>
       )
     case "Dispensed Prescriptions":
       return (
         <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
-          <path d="M11 2H5C4.46957 2 3.96086 2.21071 3.58579 2.58579C3.21071 2.96086 3 3.46957 3 4V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18H15C15.5304 18 16.0391 17.7893 16.4142 17.4142C16.7893 17.0391 17 16.5304 17 16V8L11 2Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M11 2V8H17M7 12L9 14L13 10" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M16.5 9.5L13.5 12.5C12.9 13.1 11.9 13.1 11.3 12.5L7.5 8.7C6.9 8.1 6.9 7.1 7.5 6.5L10.5 3.5C11.1 2.9 12.1 2.9 12.7 3.5L16.5 7.3C17.1 7.9 17.1 8.9 16.5 9.5Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 8L14 6" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M3 17L7 13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="3" cy="17" r="1.5" fill={iconColor}/>
+          <path d="M9 15L10.5 16.5L13 14" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       )
     case "Pharmacy Hours":
@@ -223,6 +237,49 @@ function getNavIcon(label: string, isActive: boolean) {
           <circle cx="10" cy="14" r="0.5" fill={iconColor} stroke={iconColor}/>
         </svg>
       )
+    case "Staff Management":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M14 15.5C14 13.567 11.985 12 9.5 12C7.015 12 5 13.567 5 15.5" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="9.5" cy="7" r="3" stroke={iconColor} strokeWidth="1.5"/>
+          <path d="M16.5 14C16.5 12.619 15.381 11.5 14 11.5" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="14" cy="7.5" r="2" stroke={iconColor} strokeWidth="1.5"/>
+        </svg>
+      )
+    case "Patient Records":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M11 2H5C4.46957 2 3.96086 2.21071 3.58579 2.58579C3.21071 2.96086 3 3.46957 3 4V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18H15C15.5304 18 16.0391 17.7893 16.4142 17.4142C16.7893 17.0391 17 16.5304 17 16V8L11 2Z" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M11 2V8H17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M10 11C10.8284 11 11.5 10.3284 11.5 9.5C11.5 8.67157 10.8284 8 10 8C9.17157 8 8.5 8.67157 8.5 9.5C8.5 10.3284 9.17157 11 10 11Z" stroke={iconColor} strokeWidth="1.5"/>
+          <path d="M13 15C13 13.3431 11.6569 12 10 12C8.34315 12 7 13.3431 7 15" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      )
+    case "Departments":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="9" width="6" height="9" rx="1" stroke={iconColor} strokeWidth="1.5"/>
+          <rect x="12" y="9" width="6" height="9" rx="1" stroke={iconColor} strokeWidth="1.5"/>
+          <rect x="7" y="2" width="6" height="16" rx="1" stroke={iconColor} strokeWidth="1.5"/>
+        </svg>
+      )
+    case "Laboratory":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M7 2V7L3 14C2.5 15 3 16 4 16H16C17 16 17.5 15 17 14L13 7V2" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7 2H13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M5 11H15" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      )
+    case "Reports":
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+          <path d="M17 11V16C17 16.5304 16.7893 17.0391 16.4142 17.4142C16.0391 17.7893 15.5304 18 15 18H5C4.46957 18 3.96086 17.7893 3.58579 17.4142C3.21071 17.0391 3 16.5304 3 16V4C3 3.46957 3.21071 2.96086 3.58579 2.58579C3.96086 2.21071 4.46957 2 5 2H9" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7 10H13M7 14H10" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M14 2V6H18" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M18 6L14 2" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )
     case "Notification":
       return (
         <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
@@ -253,6 +310,7 @@ export function AppShell({ children }: AppShellProps) {
   const [showNotifications, setShowNotifications] = useState(false)
   const [unreadCount, setUnreadCount] = useState(3)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -277,9 +335,23 @@ export function AppShell({ children }: AppShellProps) {
   })
 
   return (
-    <div className="flex h-screen bg-[#f2f8ff]">
+    <div className="flex min-h-screen bg-[#f2f8ff]">
+      {/* Mobile sidebar backdrop */}
+      {isMobileSidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/30 md:hidden"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${isMounted && isSidebarCollapsed ? "w-[84px]" : "w-[240px]"} bg-white flex flex-col transition-all duration-200`}>
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 bg-white flex flex-col transform transition-transform duration-200 w-[240px]
+        ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        md:static md:translate-x-0 ${
+          isMounted && isSidebarCollapsed ? "md:w-[84px]" : "md:w-[240px]"
+        }`}
+      >
         {/* Logo */}
         <div className={`h-[72px] flex items-center ${isMounted && isSidebarCollapsed ? "px-3 justify-center" : "px-6"}`}>
           <Link href="/dashboard" className="flex items-center gap-3">
@@ -342,10 +414,27 @@ export function AppShell({ children }: AppShellProps) {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden md:ml-0">
         {/* Header */}
-        <header className="h-16 bg-white shadow-[0px_8px_28px_0px_rgba(72,89,102,0.1)] flex items-center justify-between px-6">
-          <div className="flex items-center gap-5 text-[#1f263e]">
+        <header className="h-16 bg-white shadow-[0px_8px_28px_0px_rgba(72,89,102,0.1)] flex items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center gap-3 text-[#1f263e]">
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileSidebarOpen(true)}
+              className="flex items-center justify-center md:hidden"
+              aria-label="Open navigation"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            {/* Desktop collapse button */}
             <button
               onClick={() => {
                 setIsSidebarCollapsed((prev) => {
@@ -356,7 +445,7 @@ export function AppShell({ children }: AppShellProps) {
                   return newValue
                 })
               }}
-              className="flex items-center justify-center"
+              className="hidden md:flex items-center justify-center"
               aria-label="Toggle sidebar"
             >
               <svg
@@ -370,7 +459,7 @@ export function AppShell({ children }: AppShellProps) {
             </button>
           </div>
 
-          <div className="relative flex-1 max-w-[520px] mx-6">
+          <div className="relative flex-1 max-w-[520px] mx-4 hidden sm:block">
             <input
               type="text"
               placeholder="Type any cryptocurrency..."
@@ -386,7 +475,7 @@ export function AppShell({ children }: AppShellProps) {
             </svg>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center ml-2">
             <div className="h-7 w-7 rounded-full overflow-hidden border border-[#e2e4e5]">
               <svg viewBox="0 0 3 2" className="h-full w-full">
                 <rect width="1" height="2" x="0" y="0" fill="#007a5e" />
@@ -399,7 +488,7 @@ export function AppShell({ children }: AppShellProps) {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
           {children}
         </main>
       </div>

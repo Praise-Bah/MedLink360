@@ -81,7 +81,9 @@ export function VerificationUploadForm({
             href={backHref}
             className="absolute left-6 top-6 inline-flex items-center gap-2 text-white/90"
           >
-            <img src="/auth/icon-back.png" alt="" className="h-4 w-4" />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             <span className="text-lg font-medium">Back</span>
           </Link>
           <div className="absolute bottom-6 left-6 right-6 rounded-xl border border-white/20 bg-gradient-to-b from-white/10 to-sky-300/20 px-5 py-4 backdrop-blur-sm">

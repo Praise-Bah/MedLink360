@@ -7,6 +7,7 @@ import { DoctorDashboardContent } from "@/components/dashboard/doctor-dashboard-
 import { NurseDashboardContent } from "@/components/dashboard/nurse-dashboard-content"
 import { LabDashboardContent } from "@/components/dashboard/lab-dashboard-content"
 import { PharmacistDashboardContent } from "@/components/dashboard/pharmacist-dashboard-content"
+import { AdminDashboard } from "@/components/hospital-admin/admin-dashboard"
 
 export default function DashboardPage() {
   const [userRole, setUserRole] = useState<string | null>(null)
@@ -30,6 +31,8 @@ export default function DashboardPage() {
         return <LabDashboardContent />
       case "pharmacist":
         return <PharmacistDashboardContent />
+      case "hospital-admin":
+        return <AdminDashboard />
       default:
         return (
           <div className="bg-white rounded-lg border border-[#e2e4e5] p-6 text-center">

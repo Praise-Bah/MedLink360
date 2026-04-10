@@ -64,7 +64,9 @@ export function ProfileRoleProviderForm() {
             href="/profile-step-two"
             className="absolute left-6 top-6 inline-flex items-center gap-2 text-white/90"
           >
-            <img src="/auth/icon-back.png" alt="" className="h-4 w-4" />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             <span className="text-lg font-medium">Back</span>
           </Link>
           <div className="absolute bottom-6 left-6 right-6 rounded-xl border border-white/20 bg-gradient-to-b from-white/10 to-sky-300/20 px-5 py-4 backdrop-blur-sm">
@@ -99,7 +101,9 @@ export function ProfileRoleProviderForm() {
                   Professional Title
                 </label>
                 <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                  <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <input
                     type="text"
                     value={formData.professionalTitle}
@@ -116,7 +120,9 @@ export function ProfileRoleProviderForm() {
                   Hospital or Facility
                 </label>
                 <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                  <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <input
                     type="text"
                     value={formData.hospitalName}
@@ -133,7 +139,9 @@ export function ProfileRoleProviderForm() {
                   Department / Specialty (optional)
                 </label>
                 <div className="flex items-center gap-2 rounded-[7px] border border-[color:var(--border-light)] bg-white px-4 py-2 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
-                  <img src="/auth/icon-info.png" alt="" className="h-4 w-4" />
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <input
                     type="text"
                     value={formData.department}
