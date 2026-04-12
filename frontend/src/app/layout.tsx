@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
+import { PMAssistantWidget } from "@/features/pm-assistant/PMAssistantWidget";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +30,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <PMAssistantWidget />
       </body>
     </html>
   );

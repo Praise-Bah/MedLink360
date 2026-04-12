@@ -83,16 +83,21 @@ export function HospitalRegistrationForm() {
     if (step > 1) setStep(step - 1)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
+    // Extra safety: if somehow called before step 4, just move to the next step
+    if (step < 4) {
+      handleNext()
+      return
+    }
+
     setLoading(true)
-    
+
     // TODO: Submit to backend API
     console.log("Hospital Registration:", formData)
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
     setLoading(false)
     setSubmitted(true)
   }
@@ -179,7 +184,11 @@ export function HospitalRegistrationForm() {
             <span className={step === 4 ? "text-blue-600 font-medium" : ""}>Documents</span>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+            }}
+          >
             {/* Step 1: Hospital Information */}
             {step === 1 && (
               <div className="space-y-4">
@@ -235,7 +244,7 @@ export function HospitalRegistrationForm() {
                       onChange={(e) => updateField("hospitalPhone", e.target.value)}
                       required
                       className="w-full px-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="+233 XX XXX XXXX"
+                      placeholder="+237 XX XXX XXXX"
                     />
                   </div>
                 </div>
@@ -303,11 +312,11 @@ export function HospitalRegistrationForm() {
                     required
                     className="w-full px-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                   >
+                    <option value="Cameroon">Cameroon</option>
                     <option value="Ghana">Ghana</option>
                     <option value="Nigeria">Nigeria</option>
                     <option value="Kenya">Kenya</option>
                     <option value="South Africa">South Africa</option>
-                    <option value="Cameroon">Cameroon</option>
                     <option value="Ivory Coast">Ivory Coast</option>
                     <option value="Senegal">Senegal</option>
                     <option value="Tanzania">Tanzania</option>
@@ -341,7 +350,7 @@ export function HospitalRegistrationForm() {
                       onChange={(e) => updateField("city", e.target.value)}
                       required
                       className="w-full px-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="e.g., Accra"
+                      placeholder="e.g., Douala"
                     />
                   </div>
                   <div>
@@ -354,7 +363,7 @@ export function HospitalRegistrationForm() {
                       onChange={(e) => updateField("state", e.target.value)}
                       required
                       className="w-full px-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="e.g., Greater Accra"
+                      placeholder="e.g., Littoral Region"
                     />
                   </div>
                 </div>
@@ -434,7 +443,7 @@ export function HospitalRegistrationForm() {
                       onChange={(e) => updateField("adminPhone", e.target.value)}
                       required
                       className="w-full px-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="+233 XX XXX XXXX"
+                      placeholder="+237 XX XXX XXXX"
                     />
                   </div>
                   <div>
@@ -624,7 +633,8 @@ export function HospitalRegistrationForm() {
                 </Button>
               ) : (
                 <Button
-                  type="submit"
+                  type="button"
+                  onClick={handleSubmit}
                   className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white"
                   disabled={loading}
                 >
@@ -651,7 +661,7 @@ export function HospitalRegistrationForm() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Join Ghana's Healthcare Network</h2>
+          <h2 className="text-3xl font-bold mb-4">Join Cameroon's Healthcare Network</h2>
           <p className="text-blue-100 mb-8">
             Register your hospital with MedLink360 to connect with patients, 
             streamline operations, and be part of the national healthcare ecosystem.

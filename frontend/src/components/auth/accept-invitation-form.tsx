@@ -269,7 +269,7 @@ export function AcceptInvitationForm() {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="+233 XX XXX XXXX"
+                placeholder="+237 XX XXX XXXX"
               />
             </div>
 

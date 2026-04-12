@@ -204,7 +204,6 @@ export function ProfilePage() {
                     >
                       <option value="female">female</option>
                       <option value="male">male</option>
-                      <option value="other">other</option>
                     </select>
                   </div>
 

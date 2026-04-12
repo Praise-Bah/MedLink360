@@ -12,16 +12,18 @@ interface StaffMember {
   status: "Active" | "On Leave" | "Inactive"
   phone: string
   email: string
+  qualification: string
+  experience: string
 }
 
 const staffMembers: StaffMember[] = [
-  { id: "1", name: "Dr. James Wilson", staffId: "DOC001", role: "Cardiologist", department: "Cardiology", joinDate: "March 15, 2020", status: "Active", phone: "+1 234-567-8901", email: "james.wilson@hospital.com" },
-  { id: "2", name: "Dr. Emily Brown", staffId: "DOC002", role: "General Physician", department: "General Medicine", joinDate: "June 20, 2019", status: "Active", phone: "+1 234-567-8902", email: "emily.brown@hospital.com" },
-  { id: "3", name: "Nurse Sarah Davis", staffId: "NUR001", role: "Head Nurse", department: "Emergency", joinDate: "January 10, 2021", status: "Active", phone: "+1 234-567-8903", email: "sarah.davis@hospital.com" },
-  { id: "4", name: "Dr. Michael Chen", staffId: "DOC003", role: "Neurologist", department: "Neurology", joinDate: "August 5, 2018", status: "On Leave", phone: "+1 234-567-8904", email: "michael.chen@hospital.com" },
-  { id: "5", name: "Dr. Lisa Anderson", staffId: "DOC004", role: "Pediatrician", department: "Pediatrics", joinDate: "November 12, 2022", status: "Active", phone: "+1 234-567-8905", email: "lisa.anderson@hospital.com" },
-  { id: "6", name: "Tech. David Kim", staffId: "LAB001", role: "Lab Technician", department: "Laboratory", joinDate: "April 8, 2021", status: "Active", phone: "+1 234-567-8906", email: "david.kim@hospital.com" },
-  { id: "7", name: "Pharm. Jessica Moore", staffId: "PHA001", role: "Pharmacist", department: "Pharmacy", joinDate: "September 25, 2020", status: "Active", phone: "+1 234-567-8907", email: "jessica.moore@hospital.com" },
+  { id: "1", name: "Dr. James Wilson", staffId: "DRO025", role: "Cardiologist", department: "Cardiology", joinDate: "March 15, 2020", status: "Active", phone: "+1 234-567-8901", email: "james.wilson@hospital.com", qualification: "MBBS", experience: "4+ years" },
+  { id: "2", name: "Dr. Emily Brown", staffId: "DRO024", role: "General Physician", department: "General Medicine", joinDate: "June 20, 2019", status: "Active", phone: "+1 234-567-8902", email: "emily.brown@hospital.com", qualification: "MD", experience: "3+ years" },
+  { id: "3", name: "Nurse Sarah Davis", staffId: "NUR001", role: "Head Nurse", department: "Emergency", joinDate: "January 10, 2021", status: "Active", phone: "+1 234-567-8903", email: "sarah.davis@hospital.com", qualification: "RN", experience: "5+ years" },
+  { id: "4", name: "Dr. Michael Chen", staffId: "DRO023", role: "Neurologist", department: "Neurology", joinDate: "August 5, 2018", status: "On Leave", phone: "+1 234-567-8904", email: "michael.chen@hospital.com", qualification: "MS", experience: "6+ years" },
+  { id: "5", name: "Dr. Lisa Anderson", staffId: "DRO022", role: "Pediatrician", department: "Pediatrics", joinDate: "November 12, 2022", status: "Active", phone: "+1 234-567-8905", email: "lisa.anderson@hospital.com", qualification: "MBBS", experience: "2+ years" },
+  { id: "6", name: "Tech. David Kim", staffId: "LAB001", role: "Lab Technician", department: "Laboratory", joinDate: "April 8, 2021", status: "Active", phone: "+1 234-567-8906", email: "david.kim@hospital.com", qualification: "BMLS", experience: "3+ years" },
+  { id: "7", name: "Pharm. Jessica Moore", staffId: "PHA001", role: "Pharmacist", department: "Pharmacy", joinDate: "September 25, 2020", status: "Active", phone: "+1 234-567-8907", email: "jessica.moore@hospital.com", qualification: "B.Pharm", experience: "4+ years" },
 ]
 
 export function StaffManagement() {
@@ -126,22 +128,33 @@ export function StaffManagement() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-[#e7e8eb]">
-                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Staff Name</th>
-                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Staff ID</th>
-                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Role</th>
+                <th className="w-10 py-3 px-4">
+                  <input type="checkbox" className="w-4 h-4 rounded border-[#ced4da] text-[#007bff]" />
+                </th>
+                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Doctor ID</th>
+                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Doctor Name</th>
                 <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Department</th>
-                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Join Date</th>
+                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Qualification</th>
+                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Experience</th>
                 <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Status</th>
-                <th className="text-left py-3 px-4 text-[14px] font-medium text-[#6c757d]">Actions</th>
+                <th className="w-12 py-3 px-4" />
               </tr>
             </thead>
             <tbody>
               {paginatedStaff.map((staff) => (
                 <tr key={staff.id} className="border-b border-[#f8f9fa] hover:bg-[#f8f9fa] transition-colors">
+                  <td className="py-4 px-4 align-middle">
+                    <input type="checkbox" className="w-4 h-4 rounded border-[#ced4da] text-[#007bff]" />
+                  </td>
+                  <td className="py-4 px-4 text-[14px] text-[#6c757d]">#{staff.staffId}</td>
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#007bff] flex items-center justify-center text-white font-medium">
-                        {staff.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        {staff.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)}
                       </div>
                       <div>
                         <p className="text-[14px] font-medium text-[#212529]">{staff.name}</p>
@@ -149,35 +162,30 @@ export function StaffManagement() {
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-[14px] text-[#6c757d]">{staff.staffId}</td>
-                  <td className="py-4 px-4 text-[14px] text-[#212529]">{staff.role}</td>
                   <td className="py-4 px-4 text-[14px] text-[#212529]">{staff.department}</td>
-                  <td className="py-4 px-4 text-[14px] text-[#6c757d]">{staff.joinDate}</td>
+                  <td className="py-4 px-4 text-[14px] text-[#212529]">{staff.qualification}</td>
+                  <td className="py-4 px-4 text-[14px] text-[#212529]">{staff.experience}</td>
                   <td className="py-4 px-4">
-                    <span className={`px-3 py-1 rounded-full text-[12px] font-medium ${
-                      staff.status === "Active"
-                        ? "bg-[#d4edda] text-[#155724]"
-                        : staff.status === "On Leave"
-                        ? "bg-[#fff3cd] text-[#856404]"
-                        : "bg-[#f8d7da] text-[#721c24]"
-                    }`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-[12px] font-medium ${
+                        staff.status === "Active"
+                          ? "bg-[#d4edda] text-[#155724]"
+                          : staff.status === "On Leave"
+                          ? "bg-[#fff3cd] text-[#856404]"
+                          : "bg-[#f8d7da] text-[#721c24]"
+                      }`}
+                    >
                       {staff.status}
                     </span>
                   </td>
                   <td className="py-4 px-4">
-                    <div className="flex items-center gap-2">
-                      <button className="p-2 hover:bg-[#e9ecef] rounded-lg transition-colors">
-                        <svg className="w-4 h-4 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                      </button>
-                      <button className="p-2 hover:bg-[#e9ecef] rounded-lg transition-colors">
-                        <svg className="w-4 h-4 text-[#6c757d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                      </button>
-                    </div>
+                    <button className="p-2 hover:bg-[#e9ecef] rounded-lg transition-colors" aria-label="More actions">
+                      <svg className="w-4 h-4 text-[#6c757d]" viewBox="0 0 20 20" fill="currentColor">
+                        <circle cx="10" cy="4" r="1.5" />
+                        <circle cx="10" cy="10" r="1.5" />
+                        <circle cx="10" cy="16" r="1.5" />
+                      </svg>
+                    </button>
                   </td>
                 </tr>
               ))}
