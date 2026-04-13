@@ -245,7 +245,7 @@ export function DailyNotesPage() {
                 <label className="block text-[12px] font-medium text-[#6c757d] mb-1">Note Type</label>
                 <select
                   value={newNote.type}
-                  onChange={(e) => setNewNote({ ...newNote, type: e.target.value as any })}
+                  onChange={(e) => setNewNote({ ...newNote, type: e.target.value as Note["type"] })}
                   className="w-full px-3 py-2 border border-[#e9ecef] rounded-lg text-[14px] focus:outline-none focus:border-[#007bff]"
                 >
                   <option value="general">General</option>

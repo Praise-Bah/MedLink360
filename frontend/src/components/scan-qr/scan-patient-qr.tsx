@@ -76,16 +76,21 @@ export function ScanPatientQR({ userRole = "pharmacist" }: ScanPatientQRProps) {
           }
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Camera access failed:', error)
       setHasPermission(false)
       
-      if (error.name === 'NotAllowedError') {
-        setErrorMessage("Camera permission denied. Please allow camera access in your browser settings.")
-      } else if (error.name === 'NotFoundError') {
-        setErrorMessage("No camera found. Please connect a camera and try again.")
-      } else if (error.name === 'NotReadableError') {
-        setErrorMessage("Camera is in use by another application. Please close other apps using the camera.")
+      if (error && typeof error === 'object' && 'name' in error) {
+        const err = error as { name?: string }
+        if (err.name === 'NotAllowedError') {
+          setErrorMessage("Camera permission denied. Please allow camera access in your browser settings.")
+        } else if (err.name === 'NotFoundError') {
+          setErrorMessage("No camera found. Please connect a camera and try again.")
+        } else if (err.name === 'NotReadableError') {
+          setErrorMessage("Camera is in use by another application. Please close other apps using the camera.")
+        } else {
+          setErrorMessage("Could not access camera. Please ensure camera permissions are granted.")
+        }
       } else {
         setErrorMessage("Could not access camera. Please ensure camera permissions are granted.")
       }

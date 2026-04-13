@@ -15,7 +15,7 @@ export interface UploadedFile {
   size: number
   uploadDate: string
   url?: string
-  consultationData?: any
+  consultationData?: unknown
 }
 
 export function UploadModal({ isOpen, onClose, onUpload }: UploadModalProps) {

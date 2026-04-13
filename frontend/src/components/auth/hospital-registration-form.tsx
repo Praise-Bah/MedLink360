@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/common/Button"
 
@@ -615,12 +616,12 @@ export function HospitalRegistrationForm() {
                   Back
                 </button>
               ) : (
-                <a
+                <Link
                   href="/"
                   className="px-6 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
                 >
                   Cancel
-                </a>
+                </Link>
               )}
               
               {step < 4 ? (
