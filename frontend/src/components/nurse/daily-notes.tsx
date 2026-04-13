@@ -16,10 +16,14 @@ interface Note {
 export function DailyNotesPage() {
   const [activeTab, setActiveTab] = useState<"all" | "my-notes">("all")
   const [showAddModal, setShowAddModal] = useState(false)
-  const [newNote, setNewNote] = useState({
+  const [newNote, setNewNote] = useState<{
+    patientId: string
+    content: string
+    type: Note["type"]
+  }>({
     patientId: "",
     content: "",
-    type: "general" as const
+    type: "general",
   })
 
   const notes: Note[] = [
